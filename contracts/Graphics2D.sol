@@ -149,12 +149,12 @@ library Graphics2DMethods {
         uint8[] memory buffer,
         int32 bufferOffset,
         uint32 sourceColor,
-        int32 count
-    ) internal pure //, PixelClipping memory clipping
+        int32 count,
+        PixelClipping memory clipping
+    ) internal pure 
     {
         int32 i = 0;
-        do {
-            /*
+        do {            
             if (
                 clipping.area.length > 0 &&
                 !PixelClippingMethods.isPointInPolygon(
@@ -167,7 +167,7 @@ library Graphics2DMethods {
                 bufferOffset += 4;
                 continue;
             }
-            */
+           
 
             buffer[uint32(bufferOffset + OrderR)] = uint8(sourceColor >> 16);
             buffer[uint32(bufferOffset + OrderG)] = uint8(sourceColor >> 8);
@@ -185,12 +185,12 @@ library Graphics2DMethods {
     function blendPixel(
         uint8[] memory buffer,
         int32 bufferOffset,
-        uint32 sourceColor
-    ) internal pure //, PixelClipping memory clipping
+        uint32 sourceColor,
+        PixelClipping memory clipping
+    ) internal pure
     {
         if (bufferOffset == -1) return;
 
-        /*
         if (
             clipping.area.length > 0 &&
             !PixelClippingMethods.isPointInPolygon(
@@ -201,8 +201,7 @@ library Graphics2DMethods {
         ) {
             return;
         }
-        */
-
+       
         {
             uint8 sr = uint8(sourceColor >> 16);
             uint8 sg = uint8(sourceColor >> 8);

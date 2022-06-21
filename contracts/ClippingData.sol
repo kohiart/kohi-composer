@@ -28,7 +28,7 @@ struct ClippingData {
     Matrix clipTransform;
     RectangleInt clipBox;
     bool clipping;
-    // Vector2[] clipPoly;
+    Vector2[] clipPoly;
 }
 
 library ClippingDataMethods {

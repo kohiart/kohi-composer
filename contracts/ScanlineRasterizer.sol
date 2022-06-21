@@ -267,14 +267,13 @@ library ScanlineRasterizer {
                             g.buffer,
                             bufferOffset,
                             f.sourceColor,
-                            1
-                            // , g.clippingData.clipPoly.length == 0
-                            //     ? PixelClipping(new Vector2[](0), 0, 0)
-                            //     : PixelClipping(
-                            //         g.clippingData.clipPoly,
-                            //         f.x + i,
-                            //         f.y
-                            //     )
+                            1, g.clippingData.clipPoly.length == 0
+                                ? PixelClipping(new Vector2[](0), 0, 0)
+                                : PixelClipping(
+                                    g.clippingData.clipPoly,
+                                    f.x + i,
+                                    f.y
+                                )
                         );
                     } else {
                         uint32 targetColor = ColorMath.toColor(
@@ -287,14 +286,14 @@ library ScanlineRasterizer {
                         Graphics2DMethods.blendPixel(
                             g.buffer,
                             bufferOffset,
-                            targetColor
-                            // , g.clippingData.clipPoly.length == 0
-                            //     ? PixelClipping(new Vector2[](0), 0, 0)
-                            //     : PixelClipping(
-                            //         g.clippingData.clipPoly,
-                            //         f.x + i,
-                            //         f.y
-                            //     )
+                            targetColor, 
+                            g.clippingData.clipPoly.length == 0
+                                ? PixelClipping(new Vector2[](0), 0, 0)
+                                : PixelClipping(
+                                    g.clippingData.clipPoly,
+                                    f.x + i,
+                                    f.y
+                                )
                         );
                     }
 
@@ -328,10 +327,9 @@ library ScanlineRasterizer {
                     g.buffer,
                     bufferOffset,
                     f.sourceColor,
-                    len
-                    // , g.clippingData.clipPoly.length == 0
-                    //     ? PixelClipping(new Vector2[](0), 0, 0)
-                    //     : PixelClipping(g.clippingData.clipPoly, f.x1, f.y)
+                    len, g.clippingData.clipPoly.length == 0
+                        ? PixelClipping(new Vector2[](0), 0, 0)
+                        : PixelClipping(g.clippingData.clipPoly, f.x1, f.y)
                 );
             } else {
                 int32 i = 0;
@@ -347,14 +345,13 @@ library ScanlineRasterizer {
                     Graphics2DMethods.blendPixel(
                         g.buffer,
                         bufferOffset,
-                        targetColor
-                        // , g.clippingData.clipPoly.length == 0
-                        //     ? PixelClipping(new Vector2[](0), 0, 0)
-                        //     : PixelClipping(
-                        //         g.clippingData.clipPoly,
-                        //         f.x1 + i,
-                        //         f.y
-                        //     )
+                        targetColor, g.clippingData.clipPoly.length == 0
+                            ? PixelClipping(new Vector2[](0), 0, 0)
+                            : PixelClipping(
+                                g.clippingData.clipPoly,
+                                f.x1 + i,
+                                f.y
+                            )
                     );
 
                     bufferOffset += 4;
