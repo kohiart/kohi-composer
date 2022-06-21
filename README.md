@@ -1,2 +1,4 @@
-# kohi-composer
-The low-level EVM graphics library that powers Kohi artworks.
+Kohi Composer
+=============
+
+The low-level Solidity graphics library that powers Kohi artworks.
