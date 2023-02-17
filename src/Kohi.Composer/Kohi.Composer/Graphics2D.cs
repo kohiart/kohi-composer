@@ -112,10 +112,10 @@ public class Graphics2D : CastingShim
                 continue;
             }
 
-            buffer[bufferOffset + OrderR] = Uint8(sourceColor >> 16);
-            buffer[bufferOffset + OrderG] = Uint8(sourceColor >> 8);
-            buffer[bufferOffset + OrderB] = Uint8(sourceColor >> 0);
-            buffer[bufferOffset + OrderA] = Uint8(sourceColor >> 24);
+            buffer[bufferOffset + OrderR] = uint8(sourceColor >> 16);
+            buffer[bufferOffset + OrderG] = uint8(sourceColor >> 8);
+            buffer[bufferOffset + OrderB] = uint8(sourceColor >> 0);
+            buffer[bufferOffset + OrderA] = uint8(sourceColor >> 24);
             bufferOffset += 4;
             i++;
         } while (--count != 0);
@@ -130,10 +130,10 @@ public class Graphics2D : CastingShim
             return;
 
         {
-            var sr = Uint8(sourceColor >> 16);
-            var sg = Uint8(sourceColor >> 8);
-            var sb = Uint8(sourceColor >> 0);
-            var sa = Uint8(sourceColor >> 24);
+            var sr = uint8(sourceColor >> 16);
+            var sg = uint8(sourceColor >> 8);
+            var sb = uint8(sourceColor >> 0);
+            var sa = uint8(sourceColor >> 24);
 
             unchecked
             {
@@ -151,10 +151,10 @@ public class Graphics2D : CastingShim
                     var b = buffer[bufferOffset + OrderB];
                     var a = buffer[bufferOffset + OrderA];
 
-                    buffer[bufferOffset + OrderR] = Uint8(((sr - r) * sa + (r << 8)) >> 8);
-                    buffer[bufferOffset + OrderG] = Uint8(((sg - g) * sa + (g << 8)) >> 8);
-                    buffer[bufferOffset + OrderB] = Uint8(((sb - b) * sa + (b << 8)) >> 8);
-                    buffer[bufferOffset + OrderA] = Uint8(sa + a - ((sa * a + 255) >> 8));
+                    buffer[bufferOffset + OrderR] = uint8(((sr - r) * sa + (r << 8)) >> 8);
+                    buffer[bufferOffset + OrderG] = uint8(((sg - g) * sa + (g << 8)) >> 8);
+                    buffer[bufferOffset + OrderB] = uint8(((sb - b) * sa + (b << 8)) >> 8);
+                    buffer[bufferOffset + OrderA] = uint8(sa + a - ((sa * a + 255) >> 8));
                 }
             }
         }
