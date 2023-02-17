@@ -1,7 +1,16 @@
 {
+  "scripts": {
+    "deploy": "npx hardhat run scripts/deploy.js",
+    "solhint": "solhint -f stylish contracts/**/*.sol --ignore-path .solhintignore",
+    "prettier": "prettier --write contracts/**/*.sol"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "@openzeppelin/contracts": "^4.6.0",
-    "hardhat": "^2.9.9"
+    "hardhat": "^2.9.9",
+    "prettier": "^2.8.3",
+    "prettier-plugin-solidity": "^1.1.2",
+    "solhint": "^3.3.8",
+    "solidity-coverage": "^0.7.21"
   }
 }
