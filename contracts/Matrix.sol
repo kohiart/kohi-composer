@@ -93,7 +93,7 @@ library MatrixMethods {
         returns (Vector2 memory result)
     {
         result = v;
-        transform(self, result.x, result.y);
+        (result.x, result.y) = transform(self, result.x, result.y);
         return result;
     }
 
