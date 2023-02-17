@@ -93,6 +93,24 @@ library Graphics2DMethods {
         }
     }
 
+    function render(
+        Graphics2D memory g,
+        DrawContext memory f,
+        VertexData[] memory vertices,
+        bool blend
+    ) internal pure {
+        addPath(g, vertices, f);
+        ScanlineRasterizer.renderSolid(g, f, blend);
+    }
+
+    function getBufferOffsetY(Graphics2D memory g, int32 y)
+        internal
+        pure
+        returns (int32)
+    {
+        return y * int32(g.width) * 4;
+    }
+
     function renderWithTransform(
         Graphics2D memory g,
         DrawContext memory f,
@@ -115,24 +133,6 @@ library Graphics2DMethods {
                 i++;
             }
         }
-    }
-
-    function render(
-        Graphics2D memory g,
-        DrawContext memory f,
-        VertexData[] memory vertices,
-        bool blend
-    ) internal pure {
-        addPath(g, vertices, f);
-        ScanlineRasterizer.renderSolid(g, f, blend);
-    }
-
-    function getBufferOffsetY(Graphics2D memory g, int32 y)
-        internal
-        pure
-        returns (int32)
-    {
-        return y * int32(g.width) * 4;
     }
 
     function getBufferOffsetXy(
@@ -166,8 +166,7 @@ library Graphics2DMethods {
                 i++;
                 bufferOffset += 4;
                 continue;
-            }
-           
+            }          
 
             buffer[uint32(bufferOffset + OrderR)] = uint8(sourceColor >> 16);
             buffer[uint32(bufferOffset + OrderG)] = uint8(sourceColor >> 8);
@@ -278,10 +277,12 @@ library Graphics2DMethods {
             CellRasterizer.resetCells(g.cellData);
             g.scanlineData.status = ScanlineStatus.Initial;
         }
-
-        for (uint32 i = 0; i < vertices.length; i++) {
-            if (vertices[i].command == Command.Stop) break;
+        for (uint32 i; i < vertices.length; i++) {
+            if (vertices[i].command == Command.Stop) {
+                break;
+            }
             if (vertices[i].command == Command.MoveTo) {
+                closePolygon(g, f);
                 g.scanlineData.startX = ClippingDataMethods.upscale(
                     vertices[i].position.x,
                     g.ss
