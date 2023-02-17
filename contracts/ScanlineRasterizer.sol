@@ -89,11 +89,10 @@ library ScanlineRasterizer {
         }
     }
 
-    function sweepScanline(Graphics2D memory g, Cell memory current)
-        private
-        pure
-        returns (bool)
-    {
+    function sweepScanline(
+        Graphics2D memory g,
+        Cell memory current
+    ) private pure returns (bool) {
         for (;;) {
             if (g.scanlineData.scanY > g.cellData.maxY) return false;
 
@@ -154,11 +153,10 @@ library ScanlineRasterizer {
         return true;
     }
 
-    function calculateAlpha(Graphics2D memory g, int32 area)
-        private
-        pure
-        returns (int32)
-    {
+    function calculateAlpha(
+        Graphics2D memory g,
+        int32 area
+    ) private pure returns (int32) {
         int32 cover = area >> (g.ss.value * 2 + 1 - g.aa.value);
         if (cover < 0) cover = -cover;
         if (cover > int32(g.aa.mask)) cover = int32(g.aa.mask);
@@ -267,7 +265,8 @@ library ScanlineRasterizer {
                             g.buffer,
                             bufferOffset,
                             f.sourceColor,
-                            1, g.clippingData.clipPoly.length == 0
+                            1,
+                            g.clippingData.clipPoly.length == 0
                                 ? PixelClipping(new Vector2[](0), 0, 0)
                                 : PixelClipping(
                                     g.clippingData.clipPoly,
@@ -286,7 +285,7 @@ library ScanlineRasterizer {
                         Graphics2DMethods.blendPixel(
                             g.buffer,
                             bufferOffset,
-                            targetColor, 
+                            targetColor,
                             g.clippingData.clipPoly.length == 0
                                 ? PixelClipping(new Vector2[](0), 0, 0)
                                 : PixelClipping(
@@ -327,7 +326,8 @@ library ScanlineRasterizer {
                     g.buffer,
                     bufferOffset,
                     f.sourceColor,
-                    len, g.clippingData.clipPoly.length == 0
+                    len,
+                    g.clippingData.clipPoly.length == 0
                         ? PixelClipping(new Vector2[](0), 0, 0)
                         : PixelClipping(g.clippingData.clipPoly, f.x1, f.y)
                 );
@@ -345,7 +345,8 @@ library ScanlineRasterizer {
                     Graphics2DMethods.blendPixel(
                         g.buffer,
                         bufferOffset,
-                        targetColor, g.clippingData.clipPoly.length == 0
+                        targetColor,
+                        g.clippingData.clipPoly.length == 0
                             ? PixelClipping(new Vector2[](0), 0, 0)
                             : PixelClipping(
                                 g.clippingData.clipPoly,

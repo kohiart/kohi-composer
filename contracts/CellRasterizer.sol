@@ -387,11 +387,7 @@ library CellRasterizer {
         }
     }
 
-    function sort(
-        Cell[] memory cells,
-        int32 start,
-        int32 stop
-    ) private pure {
+    function sort(Cell[] memory cells, int32 start, int32 stop) private pure {
         while (true) {
             if (stop == start) return;
 

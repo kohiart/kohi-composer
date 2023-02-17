@@ -63,11 +63,9 @@ library RoundedRectMethods {
         }
     }
 
-    function vertices(RoundedRect memory self)
-        external
-        pure
-        returns (VertexData[] memory results)
-    {
+    function vertices(
+        RoundedRect memory self
+    ) external pure returns (VertexData[] memory results) {
         uint32 count = 0;
         results = new VertexData[](1000);
 

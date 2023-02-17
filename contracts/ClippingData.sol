@@ -50,11 +50,10 @@ library ClippingDataMethods {
         return clippingData;
     }
 
-    function upscale(int64 v, SubpixelScale memory ss)
-        internal
-        pure
-        returns (int32)
-    {
+    function upscale(
+        int64 v,
+        SubpixelScale memory ss
+    ) internal pure returns (int32) {
         return
             int32(
                 Fix64.round(Fix64.mul(v, int32(ss.scale) * Fix64.ONE)) /

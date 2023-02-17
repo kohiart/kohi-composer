@@ -25,11 +25,9 @@ struct CellBlock {
 }
 
 library CellBlockMethods {
-    function create(uint32 sampling)
-        external
-        pure
-        returns (CellBlock memory cb)
-    {
+    function create(
+        uint32 sampling
+    ) external pure returns (CellBlock memory cb) {
         cb.shift = sampling;
         cb.size = uint32(1) << cb.shift;
         cb.mask = cb.size - 1;

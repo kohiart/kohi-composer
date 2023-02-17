@@ -21,8 +21,11 @@ import "./VertexData.sol";
 import "./Matrix.sol";
 
 library ApplyTransform {
-
-    function applyTransform(VertexData[] memory vertices, Matrix memory transform, VertexData[] memory transformed) internal pure {
+    function applyTransform(
+        VertexData[] memory vertices,
+        Matrix memory transform,
+        VertexData[] memory transformed
+    ) internal pure {
         for (uint i; i < vertices.length; i++) {
             if (
                 vertices[i].command != Command.Stop &&
@@ -40,7 +43,12 @@ library ApplyTransform {
         }
     }
 
-    function applyTransform(VertexData[] memory vertices, Matrix memory transform, VertexData[] memory transformed, int64 yShift) internal pure {
+    function applyTransform(
+        VertexData[] memory vertices,
+        Matrix memory transform,
+        VertexData[] memory transformed,
+        int64 yShift
+    ) internal pure {
         for (uint i; i < vertices.length; i++) {
             if (
                 vertices[i].command != Command.Stop &&

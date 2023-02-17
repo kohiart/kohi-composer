@@ -77,11 +77,9 @@ library ArcMethods {
         );
     }
 
-    function vertices(Arc memory data)
-        public
-        pure
-        returns (VertexData[] memory results)
-    {
+    function vertices(
+        Arc memory data
+    ) public pure returns (VertexData[] memory results) {
         results = new VertexData[](uint32(data.steps + 3));
 
         VertexData memory vertexData;

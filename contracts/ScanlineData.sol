@@ -36,11 +36,9 @@ struct ScanlineData {
 }
 
 library ScanlineDataMethods {
-    function create(uint32 width)
-        external
-        pure
-        returns (ScanlineData memory scanlineData)
-    {
+    function create(
+        uint32 width
+    ) external pure returns (ScanlineData memory scanlineData) {
         scanlineData.startX = 0;
         scanlineData.startY = 0;
         scanlineData.status = ScanlineStatus.Initial;

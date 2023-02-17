@@ -70,13 +70,7 @@ library EllipseMethods {
             Trig256.acos(
                 Fix64.div(
                     ra,
-                    Fix64.add(
-                        ra,
-                        Fix64.div(
-                            536870912, /* 0.125 */
-                            Fix64.ONE
-                        )
-                    )
+                    Fix64.add(ra, Fix64.div(536870912 /* 0.125 */, Fix64.ONE))
                 )
             ),
             Fix64.TWO
@@ -87,11 +81,9 @@ library EllipseMethods {
         return data;
     }
 
-    function vertices(Ellipse memory data)
-        external
-        pure
-        returns (VertexData[] memory results)
-    {
+    function vertices(
+        Ellipse memory data
+    ) external pure returns (VertexData[] memory results) {
         results = new VertexData[](data.steps + 3);
 
         VertexData memory v0;

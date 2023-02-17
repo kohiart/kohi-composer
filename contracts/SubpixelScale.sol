@@ -25,11 +25,9 @@ struct SubpixelScale {
 }
 
 library SubpixelScaleMethods {
-    function create(uint32 sampling)
-        external
-        pure
-        returns (SubpixelScale memory ss)
-    {
+    function create(
+        uint32 sampling
+    ) external pure returns (SubpixelScale memory ss) {
         ss.value = sampling;
         ss.scale = uint32(1) << ss.value;
         ss.mask = ss.scale - 1;

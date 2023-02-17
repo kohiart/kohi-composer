@@ -50,11 +50,10 @@ library Graphics2DMethods {
     int32 public constant OrderR = 2;
     int32 public constant OrderA = 3;
 
-    function create(uint32 width, uint32 height)
-        external
-        pure
-        returns (Graphics2D memory g)
-    {
+    function create(
+        uint32 width,
+        uint32 height
+    ) external pure returns (Graphics2D memory g) {
         g.width = width;
         g.height = height;
 
@@ -80,11 +79,9 @@ library Graphics2DMethods {
             int32 bufferOffset = getBufferOffsetXy(g, clippingRect.left, y);
 
             for (int32 x = 0; x < clippingRect.right - clippingRect.left; x++) {
-                g.buffer[
-                    uint32(
-                        bufferOffset /*+ OrderB */
-                    )
-                ] = uint8(color >> 0);
+                g.buffer[uint32(bufferOffset /*+ OrderB */)] = uint8(
+                    color >> 0
+                );
                 g.buffer[uint32(bufferOffset + OrderG)] = uint8(color >> 8);
                 g.buffer[uint32(bufferOffset + OrderR)] = uint8(color >> 16);
                 g.buffer[uint32(bufferOffset + OrderA)] = uint8(color >> 24);
@@ -103,11 +100,10 @@ library Graphics2DMethods {
         ScanlineRasterizer.renderSolid(g, f, blend);
     }
 
-    function getBufferOffsetY(Graphics2D memory g, int32 y)
-        internal
-        pure
-        returns (int32)
-    {
+    function getBufferOffsetY(
+        Graphics2D memory g,
+        int32 y
+    ) internal pure returns (int32) {
         return y * int32(g.width) * 4;
     }
 
@@ -151,10 +147,9 @@ library Graphics2DMethods {
         uint32 sourceColor,
         int32 count,
         PixelClipping memory clipping
-    ) internal pure 
-    {
+    ) internal pure {
         int32 i = 0;
-        do {            
+        do {
             if (
                 clipping.area.length > 0 &&
                 !PixelClippingMethods.isPointInPolygon(
@@ -166,15 +161,13 @@ library Graphics2DMethods {
                 i++;
                 bufferOffset += 4;
                 continue;
-            }          
+            }
 
             buffer[uint32(bufferOffset + OrderR)] = uint8(sourceColor >> 16);
             buffer[uint32(bufferOffset + OrderG)] = uint8(sourceColor >> 8);
-            buffer[
-                uint32(
-                    bufferOffset /*+ OrderB */
-                )
-            ] = uint8(sourceColor >> 0);
+            buffer[uint32(bufferOffset /*+ OrderB */)] = uint8(
+                sourceColor >> 0
+            );
             buffer[uint32(bufferOffset + OrderA)] = uint8(sourceColor >> 24);
             bufferOffset += 4;
             i++;
@@ -186,8 +179,7 @@ library Graphics2DMethods {
         int32 bufferOffset,
         uint32 sourceColor,
         PixelClipping memory clipping
-    ) internal pure
-    {
+    ) internal pure {
         if (bufferOffset == -1) return;
 
         if (
@@ -200,7 +192,7 @@ library Graphics2DMethods {
         ) {
             return;
         }
-       
+
         {
             uint8 sr = uint8(sourceColor >> 16);
             uint8 sg = uint8(sourceColor >> 8);
@@ -211,20 +203,12 @@ library Graphics2DMethods {
                 if (sourceColor >> 24 == 255) {
                     buffer[uint32(bufferOffset + OrderR)] = sr;
                     buffer[uint32(bufferOffset + OrderG)] = sg;
-                    buffer[
-                        uint32(
-                            bufferOffset /*+ OrderB */
-                        )
-                    ] = sb;
+                    buffer[uint32(bufferOffset /*+ OrderB */)] = sb;
                     buffer[uint32(bufferOffset + OrderA)] = sa;
                 } else {
                     uint8 r = buffer[uint32(bufferOffset + OrderR)];
                     uint8 g = buffer[uint32(bufferOffset + OrderG)];
-                    uint8 b = buffer[
-                        uint32(
-                            bufferOffset /*+ OrderB */
-                        )
-                    ];
+                    uint8 b = buffer[uint32(bufferOffset /*+ OrderB */)];
                     uint8 a = buffer[uint32(bufferOffset + OrderA)];
 
                     buffer[uint32(bufferOffset + OrderR)] = uint8(
@@ -245,11 +229,7 @@ library Graphics2DMethods {
                             )
                         )
                     );
-                    buffer[
-                        uint32(
-                            bufferOffset /*+ OrderB */
-                        )
-                    ] = uint8(
+                    buffer[uint32(bufferOffset /*+ OrderB */)] = uint8(
                         int8(
                             int32(
                                 (((int32(uint32(sb)) - int32(uint32(b))) *
@@ -323,10 +303,10 @@ library Graphics2DMethods {
         }
     }
 
-    function closePolygon(Graphics2D memory g, DrawContext memory f)
-        internal
-        pure
-    {
+    function closePolygon(
+        Graphics2D memory g,
+        DrawContext memory f
+    ) internal pure {
         if (g.scanlineData.status != ScanlineStatus.LineTo) {
             return;
         }

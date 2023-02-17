@@ -70,10 +70,7 @@ library StrokeMethods {
         stroke.lineCap = LineCap.Butt;
         stroke.lineJoin = LineJoin.Miter;
 
-        stroke.width = Fix64.mul(
-            width,
-            2147483648 /* 0.5 */
-        );
+        stroke.width = Fix64.mul(width, 2147483648 /* 0.5 */);
         if (stroke.width < 0) {
             stroke.widthAbs = -stroke.width;
             stroke.widthSign = -Fix64.ONE;
@@ -81,17 +78,12 @@ library StrokeMethods {
             stroke.widthAbs = stroke.width;
             stroke.widthSign = Fix64.ONE;
         }
-        stroke.widthEps = Fix64.div(
-            stroke.width,
-            4398046511104 /* 1024 */
-        );
+        stroke.widthEps = Fix64.div(stroke.width, 4398046511104 /* 1024 */);
     }
 
-    function vertices(Stroke memory self)
-        external
-        pure
-        returns (VertexData[] memory results)
-    {
+    function vertices(
+        Stroke memory self
+    ) external pure returns (VertexData[] memory results) {
         self.vertexStatus = VertexStatus.Initial;
 
         uint32 count = 0;
@@ -126,16 +118,7 @@ library StrokeMethods {
         Stroke memory self,
         uint32 i,
         VertexData[] memory v
-    )
-        private
-        pure
-        returns (
-            Command,
-            uint32,
-            int64,
-            int64
-        )
-    {
+    ) private pure returns (Command, uint32, int64, int64) {
         int64 x = 0;
         int64 y = 0;
 
@@ -222,15 +205,9 @@ library StrokeMethods {
         }
     }
 
-    function strokeVertex(Stroke memory self)
-        private
-        pure
-        returns (
-            Command,
-            int64 x,
-            int64 y
-        )
-    {
+    function strokeVertex(
+        Stroke memory self
+    ) private pure returns (Command, int64 x, int64 y) {
         x = 0;
         y = 0;
 
@@ -457,10 +434,7 @@ library StrokeMethods {
                         self.widthAbs,
                         Fix64.add(
                             self.widthAbs,
-                            Fix64.div(
-                                536870912, /* 0.125 */
-                                Fix64.ONE
-                            )
+                            Fix64.div(536870912 /* 0.125 */, Fix64.ONE)
                         )
                     )
                 ),
@@ -554,9 +528,7 @@ library StrokeMethods {
                 limit = Fix64.div((len1 < len2 ? len1 : len2), self.widthAbs);
             }
 
-            if (
-                limit < 4337916928 /* 1.01 */
-            ) {
+            if (limit < 4337916928 /* 1.01 */) {
                 limit = 4337916928; /* 1.01 */
             }
 
@@ -638,7 +610,7 @@ library StrokeMethods {
                         a.dx2,
                         a.dy2,
                         self.lineJoin,
-                        17179869184, /* 4 */
+                        17179869184 /* 4 */,
                         a.bevelDistance
                     )
                 );
@@ -690,10 +662,7 @@ library StrokeMethods {
                     self.widthAbs,
                     Fix64.add(
                         self.widthAbs,
-                        Fix64.div(
-                            536870912, /* 0.125 */
-                            Fix64.ONE
-                        )
+                        Fix64.div(536870912 /* 0.125 */, Fix64.ONE)
                     )
                 )
             ),
@@ -905,30 +874,27 @@ library StrokeMethods {
         }
     }
 
-    function previous(Stroke memory self, int32 i)
-        private
-        pure
-        returns (VertexDistance memory)
-    {
+    function previous(
+        Stroke memory self,
+        int32 i
+    ) private pure returns (VertexDistance memory) {
         return
             self.distances[
                 uint32((i + self.distanceCount - 1) % self.distanceCount)
             ];
     }
 
-    function current(Stroke memory self, int32 i)
-        private
-        pure
-        returns (VertexDistance memory)
-    {
+    function current(
+        Stroke memory self,
+        int32 i
+    ) private pure returns (VertexDistance memory) {
         return self.distances[uint32(i)];
     }
 
-    function next(Stroke memory self, int32 i)
-        private
-        pure
-        returns (VertexDistance memory)
-    {
+    function next(
+        Stroke memory self,
+        int32 i
+    ) private pure returns (VertexDistance memory) {
         return self.distances[uint32((i + 1) % self.distanceCount)];
     }
 

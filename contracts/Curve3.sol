@@ -45,11 +45,9 @@ library Curve3 {
         bezier(curve, x1, y1, cx, cy, x2, y2);
     }
 
-    function vertices(CurveData memory data)
-        external
-        pure
-        returns (VertexData[] memory results)
-    {
+    function vertices(
+        CurveData memory data
+    ) external pure returns (VertexData[] memory results) {
         results = new VertexData[](data.pointCount + 1);
         for (uint32 i = 0; i < data.pointCount; i++) {
             if (i == 0) {
@@ -97,10 +95,10 @@ library Curve3 {
         int64 dy;
     }
 
-    function recursiveBezier(CurveData memory self, RecursiveBezier memory f)
-        private
-        pure
-    {
+    function recursiveBezier(
+        CurveData memory self,
+        RecursiveBezier memory f
+    ) private pure {
         if (f.level > MathUtils.RecursionLimit) return;
 
         RecursiveBezierArgs memory a;

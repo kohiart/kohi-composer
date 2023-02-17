@@ -41,7 +41,6 @@ import "./Trig256.sol";
 */
 
 library RandomV1 {
-
     int32 private constant MBIG = 0x7fffffff;
     int32 private constant MSEED = 161803398;
 
@@ -50,17 +49,21 @@ library RandomV1 {
         int32 _inext;
         int32 _inextp;
     }
-    
-    function buildSeedTable(int32 seed) internal pure returns(PRNG memory prng) {
+
+    function buildSeedTable(
+        int32 seed
+    ) internal pure returns (PRNG memory prng) {
         uint8 ii = 0;
         int32 mj;
         int32 mk;
 
-        int32 subtraction = (seed == type(int32).min) ? type(int32).max : int32(abs(seed));
+        int32 subtraction = (seed == type(int32).min)
+            ? type(int32).max
+            : int32(abs(seed));
         mj = MSEED - subtraction;
         prng._seedArray[55] = mj;
         mk = 1;
-        for (uint8 i = 1; i < 55; i++) {  
+        for (uint8 i = 1; i < 55; i++) {
             if ((ii += 21) >= 55) {
                 ii -= 55;
             }
@@ -71,63 +74,73 @@ library RandomV1 {
         }
 
         for (uint8 k = 1; k < 5; k++) {
-
-            for (uint8 i = 1; i < 56; i++) {                
-                uint8 n = i + 30;           
+            for (uint8 i = 1; i < 56; i++) {
+                uint8 n = i + 30;
                 if (n >= 55) {
-                    n -= 55;                
+                    n -= 55;
                 }
 
-                int64 an = prng._seedArray[1 + n];                
+                int64 an = prng._seedArray[1 + n];
                 int64 ai = prng._seedArray[i];
                 prng._seedArray[i] = int32(ai - an);
-                
+
                 if (prng._seedArray[i] < 0) {
                     int64 x = prng._seedArray[i];
                     x += MBIG;
                     prng._seedArray[i] = int32(x);
-                }               
+                }
             }
         }
 
         prng._inextp = 21;
-    }   
+    }
 
-    function next(PRNG memory prng, int32 maxValue) internal pure returns (int32) {
+    function next(
+        PRNG memory prng,
+        int32 maxValue
+    ) internal pure returns (int32) {
         int32 retval = next(prng);
 
         int64 fretval = retval * Fix64.ONE;
-        int64 sample = Fix64.mul(fretval, Fix64.div(Fix64.ONE, MBIG * Fix64.ONE));
+        int64 sample = Fix64.mul(
+            fretval,
+            Fix64.div(Fix64.ONE, MBIG * Fix64.ONE)
+        );
         int64 sr = Fix64.mul(sample, maxValue * Fix64.ONE);
         int32 r = int32(sr >> 32 /* FRACTIONAL_PLACES */);
 
         return r;
     }
 
-    function next(PRNG memory prng, int32 minValue, int32 maxValue) internal pure returns(int32) {
+    function next(
+        PRNG memory prng,
+        int32 minValue,
+        int32 maxValue
+    ) internal pure returns (int32) {
         int64 range = maxValue - minValue;
-        
+
         if (range <= type(int32).max) {
             int32 retval = next(prng);
 
             int64 fretval = retval * Fix64.ONE;
-            int64 sample = Fix64.mul(fretval, Fix64.div(Fix64.ONE, MBIG * Fix64.ONE));
+            int64 sample = Fix64.mul(
+                fretval,
+                Fix64.div(Fix64.ONE, MBIG * Fix64.ONE)
+            );
             int64 sr = Fix64.mul(sample, range * Fix64.ONE);
-            int32 r = int32(sr >> 32  /* FRACTIONAL_PLACES */) + minValue;
-            
+            int32 r = int32(sr >> 32 /* FRACTIONAL_PLACES */) + minValue;
+
             return r;
-        }
-        else {
+        } else {
             int64 fretval = nextForLargeRange(prng);
             int64 sr = Fix64.mul(fretval, range * Fix64.ONE);
-            int32 r = int32(sr >> 32  /* FRACTIONAL_PLACES */) + minValue;
+            int32 r = int32(sr >> 32 /* FRACTIONAL_PLACES */) + minValue;
             return r;
         }
     }
 
-    function next(PRNG memory prng) internal pure returns(int32) {
-
-        int64 retVal;        
+    function next(PRNG memory prng) internal pure returns (int32) {
+        int64 retVal;
         int32 locINext = prng._inext;
         int32 locINextp = prng._inextp;
 
@@ -136,7 +149,7 @@ library RandomV1 {
 
         int64 a = int64(prng._seedArray[uint32(locINext)]);
         int64 b = int64(prng._seedArray[uint32(locINextp)]);
-        retVal = a - b;        
+        retVal = a - b;
 
         if (retVal == MBIG) {
             retVal--;
@@ -147,14 +160,13 @@ library RandomV1 {
 
         prng._seedArray[uint32(locINext)] = int32(retVal);
         prng._inext = locINext;
-        prng._inextp = locINextp;        
+        prng._inextp = locINextp;
 
         int32 r = int32(retVal);
         return r;
     }
 
-    function nextForLargeRange(PRNG memory prng) private pure returns(int64) {
-
+    function nextForLargeRange(PRNG memory prng) private pure returns (int64) {
         int sample1 = next(prng);
         int sample2 = next(prng);
 
@@ -167,14 +179,31 @@ library RandomV1 {
         d = Fix64.add(int64(d), (type(int32).max - 1));
         d = Fix64.div(int64(d), int64(2) * (type(int32).max - 1));
 
-        return d; 
+        return d;
     }
 
-    function nextGaussian(PRNG memory prng) internal pure returns (int64 randNormal) {
-        int64 u1 = Fix64.sub(Fix64.ONE, Fix64.mul(next(prng) * Fix64.ONE, Fix64.div(Fix64.ONE, Fix64.MAX_VALUE)));
-        int64 u2 = Fix64.sub(Fix64.ONE, Fix64.mul(next(prng) * Fix64.ONE, Fix64.div(Fix64.ONE, Fix64.MAX_VALUE)));
+    function nextGaussian(
+        PRNG memory prng
+    ) internal pure returns (int64 randNormal) {
+        int64 u1 = Fix64.sub(
+            Fix64.ONE,
+            Fix64.mul(
+                next(prng) * Fix64.ONE,
+                Fix64.div(Fix64.ONE, Fix64.MAX_VALUE)
+            )
+        );
+        int64 u2 = Fix64.sub(
+            Fix64.ONE,
+            Fix64.mul(
+                next(prng) * Fix64.ONE,
+                Fix64.div(Fix64.ONE, Fix64.MAX_VALUE)
+            )
+        );
         int64 sqrt = Trig256.sqrt(Fix64.mul(-2 * Fix64.ONE, Trig256.log(u1)));
-        int64 randStdNormal = Fix64.mul(sqrt, Trig256.sin(Fix64.mul(Fix64.TWO, Fix64.mul(Fix64.PI, u2))));
+        int64 randStdNormal = Fix64.mul(
+            sqrt,
+            Trig256.sin(Fix64.mul(Fix64.TWO, Fix64.mul(Fix64.PI, u2)))
+        );
         randNormal = Fix64.add(0, Fix64.mul(Fix64.ONE, randStdNormal));
         return randNormal;
     }

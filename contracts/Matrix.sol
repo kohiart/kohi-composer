@@ -54,19 +54,17 @@ library MatrixMethods {
         return Matrix(scale, 0, 0, scale, 0, 0);
     }
 
-    function newScale(int64 scaleX, int64 scaleY)
-        internal
-        pure
-        returns (Matrix memory)
-    {
+    function newScale(
+        int64 scaleX,
+        int64 scaleY
+    ) internal pure returns (Matrix memory) {
         return Matrix(scaleX, 0, 0, scaleY, 0, 0);
     }
 
-    function newTranslation(int64 x, int64 y)
-        internal
-        pure
-        returns (Matrix memory)
-    {
+    function newTranslation(
+        int64 x,
+        int64 y
+    ) internal pure returns (Matrix memory) {
         return Matrix(Fix64.ONE, 0, 0, Fix64.ONE, x, y);
     }
 
@@ -87,11 +85,10 @@ library MatrixMethods {
         return (x, y);
     }
 
-    function transform(Matrix memory self, Vector2 memory v)
-        internal
-        pure
-        returns (Vector2 memory result)
-    {
+    function transform(
+        Matrix memory self,
+        Vector2 memory v
+    ) internal pure returns (Vector2 memory result) {
         result = v;
         (result.x, result.y) = transform(self, result.x, result.y);
         return result;
@@ -139,11 +136,10 @@ library MatrixMethods {
         return Fix64.abs(Fix64.sub(v1, v2)) <= epsilon;
     }
 
-    function mul(Matrix memory self, Matrix memory other)
-        internal
-        pure
-        returns (Matrix memory)
-    {
+    function mul(
+        Matrix memory self,
+        Matrix memory other
+    ) internal pure returns (Matrix memory) {
         int64 t0 = Fix64.add(
             Fix64.mul(self.sx, other.sx),
             Fix64.mul(self.shy, other.shx)

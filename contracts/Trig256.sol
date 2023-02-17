@@ -201,11 +201,7 @@ library Trig256 {
 
         int256 z = rawX;
 
-        for (
-            uint8 i = 0;
-            i < 32; /* FRACTIONAL_PLACES */
-            i++
-        ) {
+        for (uint8 i = 0; i < 32 /* FRACTIONAL_PLACES */; i++) {
             z = Fix64.mul_256(z, z);
             if (z >= Fix64.ONE << 1) {
                 z = z >> 1;
@@ -296,15 +292,7 @@ library Trig256 {
         return result;
     }
 
-    function clamp(int64 x)
-        internal
-        pure
-        returns (
-            int64,
-            bool,
-            bool
-        )
-    {
+    function clamp(int64 x) internal pure returns (int64, bool, bool) {
         int64 clamped2Pi = x;
         for (uint8 i = 0; i < 29; ++i) {
             clamped2Pi %= LARGE_PI >> i;

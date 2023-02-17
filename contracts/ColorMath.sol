@@ -34,11 +34,7 @@ library ColorMath {
         return c & 0xffffffff;
     }
 
-    function lerp(
-        uint32 s,
-        uint32 t,
-        int64 k
-    ) internal pure returns (uint32) {
+    function lerp(uint32 s, uint32 t, int64 k) internal pure returns (uint32) {
         int64 bk = Fix64.sub(Fix64.ONE, k);
 
         int64 a = Fix64.add(
@@ -67,11 +63,10 @@ library ColorMath {
         return uint32(x) & 0xffffffff;
     }
 
-    function tint(uint32 targetColor, uint32 tintColor)
-        internal
-        pure
-        returns (uint32 newColor)
-    {
+    function tint(
+        uint32 targetColor,
+        uint32 tintColor
+    ) internal pure returns (uint32 newColor) {
         uint8 a = (uint8)(targetColor >> 24);
         uint8 r = (uint8)(targetColor >> 16);
         uint8 g = (uint8)(targetColor >> 8);

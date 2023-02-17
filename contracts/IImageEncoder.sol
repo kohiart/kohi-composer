@@ -18,8 +18,7 @@
 pragma solidity ^0.8.13;
 
 interface IImageEncoder {
-    function imageUri(uint8[] memory buffer)
-        external
-        view
-        returns (string memory);
+    function imageUri(
+        uint8[] memory buffer
+    ) external view returns (string memory);
 }

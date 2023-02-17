@@ -24,11 +24,9 @@ struct AntiAlias {
 }
 
 library AntiAliasMethods {
-    function create(uint32 sampling)
-        external
-        pure
-        returns (AntiAlias memory aa)
-    {
+    function create(
+        uint32 sampling
+    ) external pure returns (AntiAlias memory aa) {
         aa.value = sampling;
         aa.scale = uint32(1) << aa.value;
         aa.mask = aa.scale - 1;

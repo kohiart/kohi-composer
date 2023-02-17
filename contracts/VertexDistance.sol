@@ -28,11 +28,10 @@ struct VertexDistance {
 }
 
 library VertexDistanceMethods {
-    function isEqual(VertexDistance memory self, VertexDistance memory other)
-        internal
-        pure
-        returns (bool)
-    {
+    function isEqual(
+        VertexDistance memory self,
+        VertexDistance memory other
+    ) internal pure returns (bool) {
         int64 d = self.distance = MathUtils.calcDistance(
             self.x,
             self.y,

@@ -76,15 +76,9 @@ library MathUtils {
         int64 bY2;
     }
 
-    function calcIntersection(CalcIntersection memory f)
-        internal
-        pure
-        returns (
-            int64 x,
-            int64 y,
-            bool
-        )
-    {
+    function calcIntersection(
+        CalcIntersection memory f
+    ) internal pure returns (int64 x, int64 y, bool) {
         int64 num = Fix64.mul(
             Fix64.sub(f.aY1, f.bY1),
             Fix64.sub(f.bX2, f.bX1)

@@ -26,7 +26,6 @@ import "./Graphics2D.sol";
 import "./DrawContext.sol";
 
 library Clipping {
-    
     function moveToClip(
         int32 x1,
         int32 y1,
@@ -440,21 +439,16 @@ library Clipping {
             (y < clipBox.bottom ? int32(1) << 3 : int32(0));
     }
 
-    function clippingFlagsY(int32 y, RectangleInt memory clipBox)
-        private
-        pure
-        returns (int32)
-    {
+    function clippingFlagsY(
+        int32 y,
+        RectangleInt memory clipBox
+    ) private pure returns (int32) {
         return
             ((y > clipBox.top ? int32(1) : int32(0)) << 1) |
             ((y < clipBox.bottom ? int32(1) : int32(0)) << 3);
     }
 
-    function mulDiv(
-        int64 a,
-        int64 b,
-        int64 c
-    ) private pure returns (int32) {
+    function mulDiv(int64 a, int64 b, int64 c) private pure returns (int32) {
         int64 div = Fix64.div(b, c);
         int64 muldiv = Fix64.mul(a, div);
         return (int32)(Fix64.round(muldiv) / Fix64.ONE);

@@ -54,11 +54,9 @@ contract Curve4 {
         bezier(curve, x1, y1, x2, y2, x3, y3, x4, y4);
     }
 
-    function vertices(CurveData memory data)
-        external
-        pure
-        returns (VertexData[] memory results)
-    {
+    function vertices(
+        CurveData memory data
+    ) external pure returns (VertexData[] memory results) {
         results = new VertexData[](data.pointCount + 2);
         results[0] = VertexData(Command.MoveTo, data.points[0]);
         for (uint32 i = 1; i < data.pointCount; i++) {
@@ -116,10 +114,10 @@ contract Curve4 {
         int64 dy;
     }
 
-    function recursiveBezier(CurveData memory self, RecursiveBezier memory f)
-        private
-        pure
-    {
+    function recursiveBezier(
+        CurveData memory self,
+        RecursiveBezier memory f
+    ) private pure {
         if (f.level > MathUtils.RecursionLimit) return;
 
         RecursiveBezierArgs memory a;
