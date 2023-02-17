@@ -25,7 +25,6 @@ struct ClippingData {
     int32 f1;
     int32 x1;
     int32 y1;
-    Matrix clipTransform;
     RectangleInt clipBox;
     bool clipping;
     Vector2[] clipPoly;

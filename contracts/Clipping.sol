@@ -18,7 +18,6 @@
 pragma solidity ^0.8.13;
 
 import "./Fix64.sol";
-import "./RectangleInt.sol";
 import "./SubpixelScale.sol";
 import "./ClippingData.sol";
 import "./CellData.sol";
@@ -27,58 +26,7 @@ import "./Graphics2D.sol";
 import "./DrawContext.sol";
 
 library Clipping {
-    // function noClippingBox(ClippingData memory clippingData) internal pure {
-    //     clippingData.clipPoly = new Vector2[](0);
-    // }
-
-    function setClippingBox(
-        ClippingData memory clippingData,
-        // ,int32 left,
-        // int32 top,
-        // int32 right,
-        // int32 bottom,
-        Matrix memory transform //,int32 height
-    ) internal pure {
-        /*
-        Vector2 memory tl = MatrixMethods.transform(
-            transform,
-            Vector2(left * Fix64.ONE, top * Fix64.ONE)
-        );
-        Vector2 memory tr = MatrixMethods.transform(
-            transform,
-            Vector2(right * Fix64.ONE, top * Fix64.ONE)
-        );
-        Vector2 memory br = MatrixMethods.transform(
-            transform,
-            Vector2(right * Fix64.ONE, bottom * Fix64.ONE)
-        );
-        Vector2 memory bl = MatrixMethods.transform(
-            transform,
-            Vector2(left * Fix64.ONE, bottom * Fix64.ONE)
-        );
-        */
-
-        clippingData.clipTransform = transform;
-
-        // clippingData.clipPoly = new Vector2[](4);
-        // clippingData.clipPoly[0] = Vector2(
-        //     tl.x,
-        //     Fix64.sub(height * Fix64.ONE, tl.y)
-        // );
-        // clippingData.clipPoly[1] = Vector2(
-        //     tr.x,
-        //     Fix64.sub(height * Fix64.ONE, tr.y)
-        // );
-        // clippingData.clipPoly[2] = Vector2(
-        //     br.x,
-        //     Fix64.sub(height * Fix64.ONE, br.y)
-        // );
-        // clippingData.clipPoly[3] = Vector2(
-        //     bl.x,
-        //     Fix64.sub(height * Fix64.ONE, bl.y)
-        // );
-    }
-
+    
     function moveToClip(
         int32 x1,
         int32 y1,
