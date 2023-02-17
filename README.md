@@ -1,9 +1,7 @@
 Kohi Composer
 =============
 
-The low-level Solidity graphics library that powers Kohi artworks.
+This project contains Kohi's dual software renderer.
 
-## Running Linter / Formatting
+It includes a full Solidity and C# implementation of a CPU-based renderer.
 
-`npm run solhint`
-`npm run prettier`
