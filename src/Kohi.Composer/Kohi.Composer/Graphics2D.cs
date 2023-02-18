@@ -15,34 +15,34 @@ public class Graphics2D : CastingShim
 
     public Graphics2D(int width, int height, int scale = 1)
     {
-        this.width = width * scale;
-        this.height = height * scale;
+        this.Width = width * scale;
+        this.Height = height * scale;
 
-        aa = AntiAliasMethods.Create(8);
-        ss = SubpixelScaleMethods.Create(8);
-        scanlineData = ScanlineDataMethods.Create(width, scale);
-        clippingData = ClippingDataMethods.Create(width, height, ss, scale);
-        cellData = CellDataMethods.Create(scale);
-        buffer = new byte[this.width * 4 * this.height];
+        Aa = AntiAliasMethods.Create(8);
+        Ss = SubpixelScaleMethods.Create(8);
+        ScanlineData = ScanlineDataMethods.Create(width, scale);
+        ClippingData = ClippingDataMethods.Create(width, height, Ss, scale);
+        CellData = CellDataMethods.Create(scale);
+        Buffer = new byte[this.Width * 4 * this.Height];
     }
 
-    public AntiAlias aa { get; set; }
-    public SubpixelScale ss { get; set; }
-    public ScanlineData scanlineData { get; set; }
-    public ClippingData clippingData { get; set; }
-    public CellData cellData { get; set; }
+    public AntiAlias Aa { get; set; }
+    public SubpixelScale Ss { get; set; }
+    public ScanlineData ScanlineData { get; set; }
+    public ClippingData ClippingData { get; set; }
+    public CellData CellData { get; set; }
 
-    public byte[] buffer { get; set; }
-    public int width { get; set; }
-    public int height { get; set; }
+    public byte[] Buffer { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
 
     public static void Clear(Graphics2D g, uint color)
     {
         var clippingRect = new RectangleInt(
-            g.clippingData.ClipBox.Left / g.ss.Scale,
-            g.clippingData.ClipBox.Bottom / g.ss.Scale,
-            g.clippingData.ClipBox.Right / g.ss.Scale,
-            g.clippingData.ClipBox.Top / g.ss.Scale);
+            g.ClippingData.ClipBox.Left / g.Ss.Scale,
+            g.ClippingData.ClipBox.Bottom / g.Ss.Scale,
+            g.ClippingData.ClipBox.Right / g.Ss.Scale,
+            g.ClippingData.ClipBox.Top / g.Ss.Scale);
 
         for (var y = clippingRect.Bottom; y < clippingRect.Top; y++)
         {
@@ -51,10 +51,10 @@ public class Graphics2D : CastingShim
 
             for (var x = 0; x < clippingWidth; x++)
             {
-                g.buffer[bufferOffset + OrderB] = (byte) (color >> 0);
-                g.buffer[bufferOffset + OrderG] = (byte) (color >> 8);
-                g.buffer[bufferOffset + OrderR] = (byte) (color >> 16);
-                g.buffer[bufferOffset + OrderA] = (byte) (color >> 24);
+                g.Buffer[bufferOffset + OrderB] = (byte) (color >> 0);
+                g.Buffer[bufferOffset + OrderG] = (byte) (color >> 8);
+                g.Buffer[bufferOffset + OrderR] = (byte) (color >> 16);
+                g.Buffer[bufferOffset + OrderA] = (byte) (color >> 24);
 
                 bufferOffset += 4;
             }
@@ -89,14 +89,14 @@ public class Graphics2D : CastingShim
 
     internal static int GetBufferOffsetY(Graphics2D g, int y)
     {
-        return y * g.width * 4;
+        return y * g.Width * 4;
     }
 
     internal static int GetBufferOffsetXy(Graphics2D g, int x, int y)
     {
-        if (x < 0 || x >= g.width || y < 0 || y >= g.height)
+        if (x < 0 || x >= g.Width || y < 0 || y >= g.Height)
             return -1;
-        return y * g.width * 4 + x * 4;
+        return y * g.Width * 4 + x * 4;
     }
 
     public static void CopyPixels(byte[] buffer, int bufferOffset, uint sourceColor, int count,
@@ -162,10 +162,10 @@ public class Graphics2D : CastingShim
 
     private static void AddPath(Graphics2D g, IList<VertexData> vertices)
     {
-        if (g.cellData.Sorted)
+        if (g.CellData.Sorted)
         {
-            CellRasterizer.ResetCells(g.cellData);
-            g.scanlineData.Status = ScanlineStatus.Initial;
+            CellRasterizer.ResetCells(g.CellData);
+            g.ScanlineData.Status = ScanlineStatus.Initial;
         }
 
         for (var i = 0; i < vertices.Count; i++)
@@ -179,18 +179,18 @@ public class Graphics2D : CastingShim
             if (command == Command.MoveTo)
             {
                 ClosePolygon(g);
-                g.scanlineData.StartX = ClippingDataMethods.Upscale(vertex.Position.X, g.ss);
-                g.scanlineData.StartY = ClippingDataMethods.Upscale(vertex.Position.Y, g.ss);
-                Clipping.MoveToClip(g.scanlineData.StartX, g.scanlineData.StartY, g.clippingData);
-                g.scanlineData.Status = ScanlineStatus.MoveTo;
+                g.ScanlineData.StartX = ClippingDataMethods.Upscale(vertex.Position.X, g.Ss);
+                g.ScanlineData.StartY = ClippingDataMethods.Upscale(vertex.Position.Y, g.Ss);
+                Clipping.MoveToClip(g.ScanlineData.StartX, g.ScanlineData.StartY, g.ClippingData);
+                g.ScanlineData.Status = ScanlineStatus.MoveTo;
             }
             else
             {
                 if (command != Command.Stop && command != Command.EndPoly)
                 {
-                    Clipping.LineToClip(g, ClippingDataMethods.Upscale(vertex.Position.X, g.ss),
-                        ClippingDataMethods.Upscale(vertex.Position.Y, g.ss));
-                    g.scanlineData.Status = ScanlineStatus.LineTo;
+                    Clipping.LineToClip(g, ClippingDataMethods.Upscale(vertex.Position.X, g.Ss),
+                        ClippingDataMethods.Upscale(vertex.Position.Y, g.Ss));
+                    g.ScanlineData.Status = ScanlineStatus.LineTo;
                 }
                 else
                 {
@@ -202,8 +202,8 @@ public class Graphics2D : CastingShim
 
     internal static void ClosePolygon(Graphics2D g)
     {
-        if (g.scanlineData.Status != ScanlineStatus.LineTo) return;
-        Clipping.LineToClip(g, g.scanlineData.StartX, g.scanlineData.StartY);
-        g.scanlineData.Status = ScanlineStatus.Closed;
+        if (g.ScanlineData.Status != ScanlineStatus.LineTo) return;
+        Clipping.LineToClip(g, g.ScanlineData.StartX, g.ScanlineData.StartY);
+        g.ScanlineData.Status = ScanlineStatus.Closed;
     }
 }

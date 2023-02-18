@@ -49,13 +49,13 @@ public static class ImageData
 
     private static Image<Rgba32> ImageBufferToImage32(Graphics2D g)
     {
-        var source = g.buffer;
+        var source = g.Buffer;
         var invertedBuffer = new byte[source.Length];
         var index = 0;
-        for (var y = g.height - 1; y >= 0; y--)
+        for (var y = g.Height - 1; y >= 0; y--)
         {
             var line = Graphics2D.GetBufferOffsetY(g, y);
-            for (var x = 0; x < g.width; x++)
+            for (var x = 0; x < g.Width; x++)
             {
                 var pix = x * 4;
                 invertedBuffer[index++] = source[line + pix + 2];
@@ -66,8 +66,8 @@ public static class ImageData
         }
 
         var image2 = Image.LoadPixelData<Rgba32>(invertedBuffer,
-            g.width,
-            g.height);
+            g.Width,
+            g.Height);
         return image2;
     }
 
@@ -97,11 +97,11 @@ public static class ImageData
     public static bool ConvertImageToImageBuffer(Graphics2D g, Rgba32[] pixelArray)
     {
         var sourceIndex = 0;
-        var destBuffer = g.buffer;
-        for (var y = 0; y < g.height; y++)
+        var destBuffer = g.Buffer;
+        for (var y = 0; y < g.Height; y++)
         {
-            var destIndex = Graphics2D.GetBufferOffsetXy(g, 0, g.height - 1 - y);
-            for (var x = 0; x < g.width; x++)
+            var destIndex = Graphics2D.GetBufferOffsetXy(g, 0, g.Height - 1 - y);
+            for (var x = 0; x < g.Width; x++)
             {
                 destBuffer[destIndex++] = pixelArray[sourceIndex].B;
                 destBuffer[destIndex++] = pixelArray[sourceIndex].G;

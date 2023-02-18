@@ -11,20 +11,20 @@ public sealed class ScanlineRasterizer : CastingShim
     internal static void RenderSolid(Graphics2D g, uint color, bool blend)
     {
         Graphics2D.ClosePolygon(g);
-        CellRasterizer.SortCells(g.cellData);
-        if (g.cellData.Used == 0) return;
-        g.scanlineData.ScanY = g.cellData.MinY;
+        CellRasterizer.SortCells(g.CellData);
+        if (g.CellData.Used == 0) return;
+        g.ScanlineData.ScanY = g.CellData.MinY;
 
-        Reset(g.cellData.MinX, g.cellData.MaxX, g.scanlineData);
+        Reset(g.CellData.MinX, g.CellData.MaxX, g.ScanlineData);
         while (SweepScanline(g))
         {
-            var y = g.scanlineData.Y;
-            var spanCount = g.scanlineData.SpanIndex;
+            var y = g.ScanlineData.Y;
+            var spanCount = g.ScanlineData.SpanIndex;
 
-            g.scanlineData.Current = 1;
-            var scanlineSpan = getNextScanlineSpan(g.scanlineData);
+            g.ScanlineData.Current = 1;
+            var scanlineSpan = getNextScanlineSpan(g.ScanlineData);
 
-            var covers = g.scanlineData.Covers;
+            var covers = g.ScanlineData.Covers;
             for (;;)
             {
                 var x = scanlineSpan.X;
@@ -42,7 +42,7 @@ public sealed class ScanlineRasterizer : CastingShim
                 }
 
                 if (--spanCount == 0) break;
-                scanlineSpan = getNextScanlineSpan(g.scanlineData);
+                scanlineSpan = getNextScanlineSpan(g.ScanlineData);
             }
         }
     }
@@ -65,10 +65,10 @@ public sealed class ScanlineRasterizer : CastingShim
 
                     if (alpha == 255)
                     {
-                        Graphics2D.CopyPixels(g.buffer, bufferOffset, f.sourceColor, 1,
-                            g.clippingData.ClipPoly == null
+                        Graphics2D.CopyPixels(g.Buffer, bufferOffset, f.sourceColor, 1,
+                            g.ClippingData.ClipPoly == null
                                 ? default(PixelClipping?)
-                                : new PixelClipping {Area = g.clippingData.ClipPoly, X = f.x + i, Y = f.y});
+                                : new PixelClipping {Area = g.ClippingData.ClipPoly, X = f.x + i, Y = f.y});
                     }
                     else
                     {
@@ -76,13 +76,13 @@ public sealed class ScanlineRasterizer : CastingShim
                             (byte) (f.sourceColor >> 8),
                             (byte) (f.sourceColor >> 0));
 
-                        Graphics2D.BlendPixel(g.buffer, bufferOffset,
+                        Graphics2D.BlendPixel(g.Buffer, bufferOffset,
                             targetColor,
-                            g.clippingData.ClipPoly == null
+                            g.ClippingData.ClipPoly == null
                                 ? default(PixelClipping?)
                                 : new PixelClipping
                                 {
-                                    Area = g.clippingData.ClipPoly,
+                                    Area = g.ClippingData.ClipPoly,
                                     X = f.x + i,
                                     Y = f.y
                                 });
@@ -106,10 +106,10 @@ public sealed class ScanlineRasterizer : CastingShim
 
             if (alpha == 255)
             {
-                Graphics2D.CopyPixels(g.buffer, bufferOffset, f.sourceColor, len,
-                    g.clippingData.ClipPoly == null
+                Graphics2D.CopyPixels(g.Buffer, bufferOffset, f.sourceColor, len,
+                    g.ClippingData.ClipPoly == null
                         ? default(PixelClipping?)
-                        : new PixelClipping {Area = g.clippingData.ClipPoly, X = f.x1, Y = f.y});
+                        : new PixelClipping {Area = g.ClippingData.ClipPoly, X = f.x1, Y = f.y});
             }
             else
             {
@@ -120,11 +120,11 @@ public sealed class ScanlineRasterizer : CastingShim
 
                 do
                 {
-                    Graphics2D.BlendPixel(g.buffer, bufferOffset,
+                    Graphics2D.BlendPixel(g.Buffer, bufferOffset,
                         targetColor,
-                        g.clippingData.ClipPoly == null
+                        g.ClippingData.ClipPoly == null
                             ? default(PixelClipping?)
-                            : new PixelClipping {Area = g.clippingData.ClipPoly, X = f.x1 + i, Y = f.y});
+                            : new PixelClipping {Area = g.ClippingData.ClipPoly, X = f.x1 + i, Y = f.y});
 
                     bufferOffset += 4;
                     i++;
@@ -137,13 +137,13 @@ public sealed class ScanlineRasterizer : CastingShim
     {
         for (;;)
         {
-            if (g.scanlineData.ScanY > g.cellData.MaxY) return false;
+            if (g.ScanlineData.ScanY > g.CellData.MaxY) return false;
 
-            ResetSpans(g.scanlineData);
-            var cellCount = g.cellData.SortedY[g.scanlineData.ScanY - g.cellData.MinY].Count;
+            ResetSpans(g.ScanlineData);
+            var cellCount = g.CellData.SortedY[g.ScanlineData.ScanY - g.CellData.MinY].Count;
 
-            var cells = g.cellData.SortedCells;
-            var offset = g.cellData.SortedY[g.scanlineData.ScanY - g.cellData.MinY].Start;
+            var cells = g.CellData.SortedCells;
+            var offset = g.CellData.SortedY[g.ScanlineData.ScanY - g.CellData.MinY].Start;
 
             var cover = 0;
 
@@ -168,32 +168,32 @@ public sealed class ScanlineRasterizer : CastingShim
 
                 if (area != 0)
                 {
-                    alpha = CalculateAlpha(g, (cover << (g.ss.Value + 1)) - area);
-                    if (alpha != 0) AddCell(g.scanlineData, x, alpha);
+                    alpha = CalculateAlpha(g, (cover << (g.Ss.Value + 1)) - area);
+                    if (alpha != 0) AddCell(g.ScanlineData, x, alpha);
                     x++;
                 }
 
                 if (cellCount != 0 && current.X > x)
                 {
-                    alpha = CalculateAlpha(g, cover << (g.ss.Value + 1));
-                    if (alpha != 0) AddSpan(g.scanlineData, x, current.X - x, alpha);
+                    alpha = CalculateAlpha(g, cover << (g.Ss.Value + 1));
+                    if (alpha != 0) AddSpan(g.ScanlineData, x, current.X - x, alpha);
                 }
             }
 
-            if (g.scanlineData.SpanIndex != 0) break;
-            ++g.scanlineData.ScanY;
+            if (g.ScanlineData.SpanIndex != 0) break;
+            ++g.ScanlineData.ScanY;
         }
 
-        g.scanlineData.Y = g.scanlineData.ScanY;
-        ++g.scanlineData.ScanY;
+        g.ScanlineData.Y = g.ScanlineData.ScanY;
+        ++g.ScanlineData.ScanY;
         return true;
     }
 
     private static int CalculateAlpha(Graphics2D g, int area)
     {
-        var cover = area >> (g.ss.Value * 2 + 1 - g.aa.Value);
+        var cover = area >> (g.Ss.Value * 2 + 1 - g.Aa.Value);
         if (cover < 0) cover = -cover;
-        if (cover > g.aa.Mask) cover = g.aa.Mask;
+        if (cover > g.Aa.Mask) cover = g.Aa.Mask;
         return cover;
     }
 

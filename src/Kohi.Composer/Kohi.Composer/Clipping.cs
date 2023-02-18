@@ -13,21 +13,21 @@ public class Clipping
 
     internal static void LineToClip(Graphics2D g, int x2, int y2)
     {
-        if (g.clippingData.Clipping)
+        if (g.ClippingData.Clipping)
         {
-            var f2 = ClippingFlags(x2, y2, g.clippingData.ClipBox);
+            var f2 = ClippingFlags(x2, y2, g.ClippingData.ClipBox);
 
-            if ((g.clippingData.F1 & 10) == (f2 & 10) && (g.clippingData.F1 & 10) != 0)
+            if ((g.ClippingData.F1 & 10) == (f2 & 10) && (g.ClippingData.F1 & 10) != 0)
             {
-                g.clippingData.X1 = x2;
-                g.clippingData.Y1 = y2;
-                g.clippingData.F1 = f2;
+                g.ClippingData.X1 = x2;
+                g.ClippingData.Y1 = y2;
+                g.ClippingData.F1 = f2;
                 return;
             }
 
-            var x1 = g.clippingData.X1;
-            var y1 = g.clippingData.Y1;
-            var f1 = g.clippingData.F1;
+            var x1 = g.ClippingData.X1;
+            var y1 = g.ClippingData.Y1;
+            var f1 = g.ClippingData.F1;
             int y3;
             int y4;
             int f3;
@@ -41,114 +41,114 @@ public class Clipping
             {
                 y3 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Right - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Right - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
-                f3 = ClippingFlagsY(y3, g.clippingData.ClipBox);
-                LineClipY(g, x1, y1, g.clippingData.ClipBox.Right, y3, f1, f3);
-                LineClipY(g, g.clippingData.ClipBox.Right, y3, g.clippingData.ClipBox.Right, y2, f3, f2);
+                f3 = ClippingFlagsY(y3, g.ClippingData.ClipBox);
+                LineClipY(g, x1, y1, g.ClippingData.ClipBox.Right, y3, f1, f3);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y3, g.ClippingData.ClipBox.Right, y2, f3, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 2)
             {
                 y3 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Right - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Right - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
-                f3 = ClippingFlagsY(y3, g.clippingData.ClipBox);
-                LineClipY(g, g.clippingData.ClipBox.Right, y1, g.clippingData.ClipBox.Right, y3, f1, f3);
-                LineClipY(g, g.clippingData.ClipBox.Right, y3, x2, y2, f3, f2);
+                f3 = ClippingFlagsY(y3, g.ClippingData.ClipBox);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y1, g.ClippingData.ClipBox.Right, y3, f1, f3);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y3, x2, y2, f3, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 3)
             {
-                LineClipY(g, g.clippingData.ClipBox.Right, y1, g.clippingData.ClipBox.Right, y2, f1, f2);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y1, g.ClippingData.ClipBox.Right, y2, f1, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 4)
             {
                 y3 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Left - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Left - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
-                f3 = ClippingFlagsY(y3, g.clippingData.ClipBox);
-                LineClipY(g, x1, y1, g.clippingData.ClipBox.Left, y3, f1, f3);
-                LineClipY(g, g.clippingData.ClipBox.Left, y3, g.clippingData.ClipBox.Left, y2, f3, f2);
+                f3 = ClippingFlagsY(y3, g.ClippingData.ClipBox);
+                LineClipY(g, x1, y1, g.ClippingData.ClipBox.Left, y3, f1, f3);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y3, g.ClippingData.ClipBox.Left, y2, f3, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 6)
             {
                 y3 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Right - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Right - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
 
                 y4 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Left - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Left - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
 
-                f3 = ClippingFlagsY(y3, g.clippingData.ClipBox);
-                f4 = ClippingFlagsY(y4, g.clippingData.ClipBox);
-                LineClipY(g, g.clippingData.ClipBox.Right, y1, g.clippingData.ClipBox.Right, y3, f1, f3);
-                LineClipY(g, g.clippingData.ClipBox.Right, y3, g.clippingData.ClipBox.Left, y4, f3, f4);
-                LineClipY(g, g.clippingData.ClipBox.Left, y4, g.clippingData.ClipBox.Left, y2, f4, f2);
+                f3 = ClippingFlagsY(y3, g.ClippingData.ClipBox);
+                f4 = ClippingFlagsY(y4, g.ClippingData.ClipBox);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y1, g.ClippingData.ClipBox.Right, y3, f1, f3);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y3, g.ClippingData.ClipBox.Left, y4, f3, f4);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y4, g.ClippingData.ClipBox.Left, y2, f4, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 8)
             {
                 y3 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Left - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Left - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
 
-                f3 = ClippingFlagsY(y3, g.clippingData.ClipBox);
-                LineClipY(g, g.clippingData.ClipBox.Left, y1, g.clippingData.ClipBox.Left, y3, f1, f3);
-                LineClipY(g, g.clippingData.ClipBox.Left, y3, x2, y2, f3, f2);
+                f3 = ClippingFlagsY(y3, g.ClippingData.ClipBox);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y1, g.ClippingData.ClipBox.Left, y3, f1, f3);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y3, x2, y2, f3, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 9)
             {
                 y3 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Left - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Left - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
 
                 y4 = y1 +
                      MulDiv(
-                         (g.clippingData.ClipBox.Right - x1) * Fix64.One,
+                         (g.ClippingData.ClipBox.Right - x1) * Fix64.One,
                          (y2 - y1) * Fix64.One,
                          (x2 - x1) * Fix64.One
                      );
-                f3 = ClippingFlagsY(y3, g.clippingData.ClipBox);
-                f4 = ClippingFlagsY(y4, g.clippingData.ClipBox);
-                LineClipY(g, g.clippingData.ClipBox.Left, y1, g.clippingData.ClipBox.Left, y3, f1, f3);
-                LineClipY(g, g.clippingData.ClipBox.Left, y3, g.clippingData.ClipBox.Right, y4, f3, f4);
-                LineClipY(g, g.clippingData.ClipBox.Right, y4, g.clippingData.ClipBox.Right, y2, f4, f2);
+                f3 = ClippingFlagsY(y3, g.ClippingData.ClipBox);
+                f4 = ClippingFlagsY(y4, g.ClippingData.ClipBox);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y1, g.ClippingData.ClipBox.Left, y3, f1, f3);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y3, g.ClippingData.ClipBox.Right, y4, f3, f4);
+                LineClipY(g, g.ClippingData.ClipBox.Right, y4, g.ClippingData.ClipBox.Right, y2, f4, f2);
             }
             else if ((((f1 & 5) << 1) | (f2 & 5)) == 12)
             {
-                LineClipY(g, g.clippingData.ClipBox.Left, y1, g.clippingData.ClipBox.Left, y2, f1, f2);
+                LineClipY(g, g.ClippingData.ClipBox.Left, y1, g.ClippingData.ClipBox.Left, y2, f1, f2);
             }
 
-            g.clippingData.F1 = f2;
+            g.ClippingData.F1 = f2;
         }
         else
         {
-            CellRasterizer.Line(new CellRasterizer.LineMethodArgs(g.clippingData.X1, g.clippingData.Y1, x2, y2),
-                g.cellData,
-                g.ss);
+            CellRasterizer.Line(new CellRasterizer.LineMethodArgs(g.ClippingData.X1, g.ClippingData.Y1, x2, y2),
+                g.CellData,
+                g.Ss);
         }
 
-        g.clippingData.X1 = x2;
-        g.clippingData.Y1 = y2;
+        g.ClippingData.X1 = x2;
+        g.ClippingData.Y1 = y2;
     }
 
     private static void LineClipY(Graphics2D g, int x1, int y1, int x2, int y2, int f1, int f2)
@@ -157,7 +157,7 @@ public class Clipping
         f2 &= 10;
         if ((f1 | f2) == 0)
         {
-            CellRasterizer.Line(new CellRasterizer.LineMethodArgs(x1, y1, x2, y2), g.cellData, g.ss);
+            CellRasterizer.Line(new CellRasterizer.LineMethodArgs(x1, y1, x2, y2), g.CellData, g.Ss);
         }
         else
         {
@@ -174,51 +174,51 @@ public class Clipping
             {
                 tx1 = x1 +
                       MulDiv(
-                          (g.clippingData.ClipBox.Bottom - y1) * Fix64.One,
+                          (g.ClippingData.ClipBox.Bottom - y1) * Fix64.One,
                           (x2 - x1) * Fix64.One,
                           (y2 - y1) * Fix64.One
                       );
 
-                ty1 = g.clippingData.ClipBox.Bottom;
+                ty1 = g.ClippingData.ClipBox.Bottom;
             }
 
             if ((f1 & 2) != 0) // y1 > clip.y2
             {
                 tx1 = x1 +
                       MulDiv(
-                          (g.clippingData.ClipBox.Top - y1) * Fix64.One,
+                          (g.ClippingData.ClipBox.Top - y1) * Fix64.One,
                           (x2 - x1) * Fix64.One,
                           (y2 - y1) * Fix64.One
                       );
 
-                ty1 = g.clippingData.ClipBox.Top;
+                ty1 = g.ClippingData.ClipBox.Top;
             }
 
             if ((f2 & 8) != 0) // y2 < clip.y1
             {
                 tx2 = x1 +
                       MulDiv(
-                          (g.clippingData.ClipBox.Bottom - y1) * Fix64.One,
+                          (g.ClippingData.ClipBox.Bottom - y1) * Fix64.One,
                           (x2 - x1) * Fix64.One,
                           (y2 - y1) * Fix64.One
                       );
 
-                ty2 = g.clippingData.ClipBox.Bottom;
+                ty2 = g.ClippingData.ClipBox.Bottom;
             }
 
             if ((f2 & 2) != 0) // y2 > clip.y2
             {
                 tx2 = x1 +
                       MulDiv(
-                          (g.clippingData.ClipBox.Top - y1) * Fix64.One,
+                          (g.ClippingData.ClipBox.Top - y1) * Fix64.One,
                           (x2 - x1) * Fix64.One,
                           (y2 - y1) * Fix64.One
                       );
 
-                ty2 = g.clippingData.ClipBox.Top;
+                ty2 = g.ClippingData.ClipBox.Top;
             }
 
-            CellRasterizer.Line(new CellRasterizer.LineMethodArgs(tx1, ty1, tx2, ty2), g.cellData, g.ss);
+            CellRasterizer.Line(new CellRasterizer.LineMethodArgs(tx1, ty1, tx2, ty2), g.CellData, g.Ss);
         }
     }
 
