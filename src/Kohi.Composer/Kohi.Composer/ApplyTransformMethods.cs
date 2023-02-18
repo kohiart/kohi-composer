@@ -4,13 +4,8 @@ namespace Kohi.Composer;
 
 public static class ApplyTransformMethods
 {
-    public static int MaxTransformSize = int.MinValue;
-
     public static IList<VertexData> ApplyTransform(IList<VertexData> vertices, Matrix transform)
     {
-        if (vertices.Count > MaxTransformSize)
-            MaxTransformSize = vertices.Count;
-
         var results = new VertexData[vertices.Count];
         for (var i = 0; i < vertices.Count; i++)
         {

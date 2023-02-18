@@ -36,7 +36,7 @@ public class Graphics2D : CastingShim
     public int width { get; set; }
     public int height { get; set; }
 
-    public static void clear(Graphics2D g, uint color)
+    public static void Clear(Graphics2D g, uint color)
     {
         var clippingRect = new RectangleInt(
             g.clippingData.ClipBox.Left / g.ss.Scale,
