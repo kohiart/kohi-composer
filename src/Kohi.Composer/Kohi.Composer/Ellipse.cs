@@ -2,7 +2,7 @@
 
 namespace Kohi.Composer;
 
-public class Ellipse // : IVertexReader
+public class Ellipse
 {
     public readonly long RadiusX;
     public readonly long RadiusY;
