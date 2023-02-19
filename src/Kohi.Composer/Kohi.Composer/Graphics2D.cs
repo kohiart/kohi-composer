@@ -15,15 +15,15 @@ public class Graphics2D : CastingShim
 
     public Graphics2D(int width, int height, int scale = 1)
     {
-        this.Width = width * scale;
-        this.Height = height * scale;
+        Width = width * scale;
+        Height = height * scale;
 
         Aa = AntiAliasMethods.Create(8);
         Ss = SubpixelScaleMethods.Create(8);
         ScanlineData = ScanlineDataMethods.Create(width, scale);
         ClippingData = ClippingDataMethods.Create(width, height, Ss, scale);
         CellData = CellDataMethods.Create(scale);
-        Buffer = new byte[this.Width * 4 * this.Height];
+        Buffer = new byte[Width * 4 * Height];
     }
 
     public AntiAlias Aa { get; set; }
