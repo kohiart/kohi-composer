@@ -354,30 +354,24 @@ public static class SinLut256
                         {
                             if (i == 96)
                                 return 2394398909;
-                            else
-                                return 2416317469;
+                            return 2416317469;
                         }
 
                         if (i == 98)
                             return 2438144340;
-                        else
-                            return 2459878695;
+                        return 2459878695;
                     }
 
                     if (i <= 101)
                     {
                         if (i == 100)
                             return 2481519710;
-                        else
-                            return 2503066562;
+                        return 2503066562;
                     }
-                    else
-                    {
-                        if (i == 102)
-                            return 2524518435;
-                        else
-                            return 2545874514;
-                    }
+
+                    if (i == 102)
+                        return 2524518435;
+                    return 2545874514;
                 }
 
                 if (i <= 107)
@@ -386,34 +380,24 @@ public static class SinLut256
                     {
                         if (i == 104)
                             return 2567133990;
-                        else
-                            return 2588296054;
+                        return 2588296054;
                     }
-                    else
-                    {
-                        if (i == 106)
-                            return 2609359905;
-                        else
-                            return 2630324743;
-                    }
+
+                    if (i == 106)
+                        return 2609359905;
+                    return 2630324743;
                 }
-                else
+
+                if (i <= 109)
                 {
-                    if (i <= 109)
-                    {
-                        if (i == 108)
-                            return 2651189772;
-                        else
-                            return 2671954202;
-                    }
-                    else
-                    {
-                        if (i == 110)
-                            return 2692617243;
-                        else
-                            return 2713178112;
-                    }
+                    if (i == 108)
+                        return 2651189772;
+                    return 2671954202;
                 }
+
+                if (i == 110)
+                    return 2692617243;
+                return 2713178112;
             }
 
             if (i <= 119)
@@ -424,72 +408,50 @@ public static class SinLut256
                     {
                         if (i == 112)
                             return 2733636028;
-                        else
-                            return 2753990216;
+                        return 2753990216;
                     }
-                    else
-                    {
-                        if (i == 114)
-                            return 2774239903;
-                        else
-                            return 2794384321;
-                    }
+
+                    if (i == 114)
+                        return 2774239903;
+                    return 2794384321;
                 }
-                else
+
+                if (i <= 117)
                 {
-                    if (i <= 117)
-                    {
-                        if (i == 116)
-                            return 2814422705;
-                        else
-                            return 2834354295;
-                    }
-                    else
-                    {
-                        if (i == 118)
-                            return 2854178334;
-                        else
-                            return 2873894071;
-                    }
+                    if (i == 116)
+                        return 2814422705;
+                    return 2834354295;
                 }
+
+                if (i == 118)
+                    return 2854178334;
+                return 2873894071;
             }
-            else
+
+            if (i <= 123)
             {
-                if (i <= 123)
+                if (i <= 121)
                 {
-                    if (i <= 121)
-                    {
-                        if (i == 120)
-                            return 2893500756;
-                        else
-                            return 2912997648;
-                    }
-                    else
-                    {
-                        if (i == 122)
-                            return 2932384004;
-                        else
-                            return 2951659090;
-                    }
+                    if (i == 120)
+                        return 2893500756;
+                    return 2912997648;
                 }
-                else
-                {
-                    if (i <= 125)
-                    {
-                        if (i == 124)
-                            return 2970822175;
-                        else
-                            return 2989872531;
-                    }
-                    else
-                    {
-                        if (i == 126)
-                            return 3008809435;
-                        else
-                            return 3027632170;
-                    }
-                }
+
+                if (i == 122)
+                    return 2932384004;
+                return 2951659090;
             }
+
+            if (i <= 125)
+            {
+                if (i == 124)
+                    return 2970822175;
+                return 2989872531;
+            }
+
+            if (i == 126)
+                return 3008809435;
+            return 3027632170;
         }
 
         if (i <= 191)
@@ -535,275 +497,427 @@ public static class SinLut256
                             }
                         }
                     }
-                    else
+
+                    if (i <= 139)
                     {
-                        if (i <= 139)
+                        if (i <= 137)
                         {
-                            if (i <= 137)
-                            {
-                                if (i == 136)
-                                    return 3191782721;
-                                else
-                                    return 3209425199;
-                            }
+                            if (i == 136)
+                                return 3191782721;
                             else
-                            {
-                                if (i == 138)
-                                    return 3226945894;
-                                else
-                                    return 3244344141;
-                            }
+                                return 3209425199;
                         }
                         else
                         {
-                            if (i <= 141)
-                            {
-                                if (i == 140)
-                                    return 3261619281;
-                                else
-                                    return 3278770658;
-                            }
+                            if (i == 138)
+                                return 3226945894;
                             else
-                            {
-                                if (i == 142)
-                                    return 3295797620;
-                                else
-                                    return 3312699523;
-                            }
+                                return 3244344141;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 141)
+                        {
+                            if (i == 140)
+                                return 3261619281;
+                            else
+                                return 3278770658;
+                        }
+                        else
+                        {
+                            if (i == 142)
+                                return 3295797620;
+                            else
+                                return 3312699523;
+                        }
+                    }
+                }
+
+                if (i <= 151)
+                {
+                    if (i <= 147)
+                    {
+                        if (i <= 145)
+                        {
+                            if (i == 144)
+                                return 3329475725;
+                            else
+                                return 3346125588;
+                        }
+                        else
+                        {
+                            if (i == 146)
+                                return 3362648482;
+                            else
+                                return 3379043779;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 149)
+                        {
+                            if (i == 148)
+                                return 3395310857;
+                            else
+                                return 3411449099;
+                        }
+                        else
+                        {
+                            if (i == 150)
+                                return 3427457892;
+                            else
+                                return 3443336630;
                         }
                     }
                 }
                 else
                 {
-                    if (i <= 151)
+                    if (i <= 155)
                     {
-                        if (i <= 147)
+                        if (i <= 153)
                         {
-                            if (i <= 145)
-                            {
-                                if (i == 144)
-                                    return 3329475725;
-                                else
-                                    return 3346125588;
-                            }
+                            if (i == 152)
+                                return 3459084709;
                             else
-                            {
-                                if (i == 146)
-                                    return 3362648482;
-                                else
-                                    return 3379043779;
-                            }
+                                return 3474701532;
                         }
                         else
                         {
-                            if (i <= 149)
-                            {
-                                if (i == 148)
-                                    return 3395310857;
-                                else
-                                    return 3411449099;
-                            }
+                            if (i == 154)
+                                return 3490186507;
                             else
-                            {
-                                if (i == 150)
-                                    return 3427457892;
-                                else
-                                    return 3443336630;
-                            }
+                                return 3505539045;
                         }
                     }
                     else
                     {
-                        if (i <= 155)
+                        if (i <= 157)
                         {
-                            if (i <= 153)
-                            {
-                                if (i == 152)
-                                    return 3459084709;
-                                else
-                                    return 3474701532;
-                            }
+                            if (i == 156)
+                                return 3520758565;
                             else
-                            {
-                                if (i == 154)
-                                    return 3490186507;
-                                else
-                                    return 3505539045;
-                            }
+                                return 3535844488;
                         }
                         else
                         {
-                            if (i <= 157)
-                            {
-                                if (i == 156)
-                                    return 3520758565;
-                                else
-                                    return 3535844488;
-                            }
+                            if (i == 158)
+                                return 3550796243;
                             else
-                            {
-                                if (i == 158)
-                                    return 3550796243;
-                                else
-                                    return 3565613262;
-                            }
+                                return 3565613262;
+                        }
+                    }
+                }
+            }
+
+            if (i <= 175)
+            {
+                if (i <= 167)
+                {
+                    if (i <= 163)
+                    {
+                        if (i <= 161)
+                        {
+                            if (i == 160)
+                                return 3580294982;
+                            else
+                                return 3594840847;
+                        }
+                        else
+                        {
+                            if (i == 162)
+                                return 3609250305;
+                            else
+                                return 3623522808;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 165)
+                        {
+                            if (i == 164)
+                                return 3637657816;
+                            else
+                                return 3651654792;
+                        }
+                        else
+                        {
+                            if (i == 166)
+                                return 3665513205;
+                            else
+                                return 3679232528;
+                        }
+                    }
+                }
+                else
+                {
+                    if (i <= 171)
+                    {
+                        if (i <= 169)
+                        {
+                            if (i == 168)
+                                return 3692812243;
+                            else
+                                return 3706251832;
+                        }
+                        else
+                        {
+                            if (i == 170)
+                                return 3719550786;
+                            else
+                                return 3732708601;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 173)
+                        {
+                            if (i == 172)
+                                return 3745724777;
+                            else
+                                return 3758598821;
+                        }
+                        else
+                        {
+                            if (i == 174)
+                                return 3771330243;
+                            else
+                                return 3783918561;
                         }
                     }
                 }
             }
             else
             {
-                if (i <= 175)
+                if (i <= 183)
                 {
-                    if (i <= 167)
+                    if (i <= 179)
                     {
-                        if (i <= 163)
+                        if (i <= 177)
                         {
-                            if (i <= 161)
-                            {
-                                if (i == 160)
-                                    return 3580294982;
-                                else
-                                    return 3594840847;
-                            }
+                            if (i == 176)
+                                return 3796363297;
                             else
-                            {
-                                if (i == 162)
-                                    return 3609250305;
-                                else
-                                    return 3623522808;
-                            }
+                                return 3808663979;
                         }
                         else
                         {
-                            if (i <= 165)
-                            {
-                                if (i == 164)
-                                    return 3637657816;
-                                else
-                                    return 3651654792;
-                            }
+                            if (i == 178)
+                                return 3820820141;
                             else
-                            {
-                                if (i == 166)
-                                    return 3665513205;
-                                else
-                                    return 3679232528;
-                            }
+                                return 3832831319;
                         }
                     }
                     else
                     {
-                        if (i <= 171)
+                        if (i <= 181)
                         {
-                            if (i <= 169)
-                            {
-                                if (i == 168)
-                                    return 3692812243;
-                                else
-                                    return 3706251832;
-                            }
+                            if (i == 180)
+                                return 3844697060;
                             else
-                            {
-                                if (i == 170)
-                                    return 3719550786;
-                                else
-                                    return 3732708601;
-                            }
+                                return 3856416913;
                         }
                         else
                         {
-                            if (i <= 173)
-                            {
-                                if (i == 172)
-                                    return 3745724777;
-                                else
-                                    return 3758598821;
-                            }
+                            if (i == 182)
+                                return 3867990433;
                             else
-                            {
-                                if (i == 174)
-                                    return 3771330243;
-                                else
-                                    return 3783918561;
-                            }
+                                return 3879417181;
                         }
                     }
                 }
                 else
                 {
-                    if (i <= 183)
+                    if (i <= 187)
                     {
-                        if (i <= 179)
+                        if (i <= 185)
                         {
-                            if (i <= 177)
-                            {
-                                if (i == 176)
-                                    return 3796363297;
-                                else
-                                    return 3808663979;
-                            }
+                            if (i == 184)
+                                return 3890696723;
                             else
-                            {
-                                if (i == 178)
-                                    return 3820820141;
-                                else
-                                    return 3832831319;
-                            }
+                                return 3901828632;
                         }
                         else
                         {
-                            if (i <= 181)
-                            {
-                                if (i == 180)
-                                    return 3844697060;
-                                else
-                                    return 3856416913;
-                            }
+                            if (i == 186)
+                                return 3912812484;
                             else
-                            {
-                                if (i == 182)
-                                    return 3867990433;
-                                else
-                                    return 3879417181;
-                            }
+                                return 3923647863;
                         }
                     }
                     else
                     {
-                        if (i <= 187)
+                        if (i <= 189)
                         {
-                            if (i <= 185)
-                            {
-                                if (i == 184)
-                                    return 3890696723;
-                                else
-                                    return 3901828632;
-                            }
+                            if (i == 188)
+                                return 3934334359;
                             else
-                            {
-                                if (i == 186)
-                                    return 3912812484;
-                                else
-                                    return 3923647863;
-                            }
+                                return 3944871565;
                         }
                         else
                         {
-                            if (i <= 189)
-                            {
-                                if (i == 188)
-                                    return 3934334359;
-                                else
-                                    return 3944871565;
-                            }
+                            if (i == 190)
+                                return 3955259082;
                             else
-                            {
-                                if (i == 190)
-                                    return 3955259082;
-                                else
-                                    return 3965496515;
-                            }
+                                return 3965496515;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (i <= 223)
+        {
+            if (i <= 207)
+            {
+                if (i <= 199)
+                {
+                    if (i <= 195)
+                    {
+                        if (i <= 193)
+                        {
+                            if (i == 192)
+                                return 3975583476;
+                            else
+                                return 3985519583;
+                        }
+                        else
+                        {
+                            if (i == 194)
+                                return 3995304457;
+                            else
+                                return 4004937729;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 197)
+                        {
+                            if (i == 196)
+                                return 4014419032;
+                            else
+                                return 4023748007;
+                        }
+                        else
+                        {
+                            if (i == 198)
+                                return 4032924300;
+                            else
+                                return 4041947562;
+                        }
+                    }
+                }
+                else
+                {
+                    if (i <= 203)
+                    {
+                        if (i <= 201)
+                        {
+                            if (i == 200)
+                                return 4050817451;
+                            else
+                                return 4059533630;
+                        }
+                        else
+                        {
+                            if (i == 202)
+                                return 4068095769;
+                            else
+                                return 4076503544;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 205)
+                        {
+                            if (i == 204)
+                                return 4084756634;
+                            else
+                                return 4092854726;
+                        }
+                        else
+                        {
+                            if (i == 206)
+                                return 4100797514;
+                            else
+                                return 4108584696;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (i <= 215)
+                {
+                    if (i <= 211)
+                    {
+                        if (i <= 209)
+                        {
+                            if (i == 208)
+                                return 4116215977;
+                            else
+                                return 4123691067;
+                        }
+                        else
+                        {
+                            if (i == 210)
+                                return 4131009681;
+                            else
+                                return 4138171544;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 213)
+                        {
+                            if (i == 212)
+                                return 4145176382;
+                            else
+                                return 4152023930;
+                        }
+                        else
+                        {
+                            if (i == 214)
+                                return 4158713929;
+                            else
+                                return 4165246124;
+                        }
+                    }
+                }
+                else
+                {
+                    if (i <= 219)
+                    {
+                        if (i <= 217)
+                        {
+                            if (i == 216)
+                                return 4171620267;
+                            else
+                                return 4177836117;
+                        }
+                        else
+                        {
+                            if (i == 218)
+                                return 4183893437;
+                            else
+                                return 4189791999;
+                        }
+                    }
+                    else
+                    {
+                        if (i <= 221)
+                        {
+                            if (i == 220)
+                                return 4195531577;
+                            else
+                                return 4201111955;
+                        }
+                        else
+                        {
+                            if (i == 222)
+                                return 4206532921;
+                            else
+                                return 4211794268;
                         }
                     }
                 }
@@ -811,316 +925,156 @@ public static class SinLut256
         }
         else
         {
-            if (i <= 223)
+            if (i <= 239)
             {
-                if (i <= 207)
+                if (i <= 231)
                 {
-                    if (i <= 199)
+                    if (i <= 227)
                     {
-                        if (i <= 195)
+                        if (i <= 225)
                         {
-                            if (i <= 193)
-                            {
-                                if (i == 192)
-                                    return 3975583476;
-                                else
-                                    return 3985519583;
-                            }
+                            if (i == 224)
+                                return 4216895797;
                             else
-                            {
-                                if (i == 194)
-                                    return 3995304457;
-                                else
-                                    return 4004937729;
-                            }
+                                return 4221837315;
                         }
                         else
                         {
-                            if (i <= 197)
-                            {
-                                if (i == 196)
-                                    return 4014419032;
-                                else
-                                    return 4023748007;
-                            }
+                            if (i == 226)
+                                return 4226618635;
                             else
-                            {
-                                if (i == 198)
-                                    return 4032924300;
-                                else
-                                    return 4041947562;
-                            }
+                                return 4231239573;
                         }
                     }
                     else
                     {
-                        if (i <= 203)
+                        if (i <= 229)
                         {
-                            if (i <= 201)
-                            {
-                                if (i == 200)
-                                    return 4050817451;
-                                else
-                                    return 4059533630;
-                            }
+                            if (i == 228)
+                                return 4235699957;
                             else
-                            {
-                                if (i == 202)
-                                    return 4068095769;
-                                else
-                                    return 4076503544;
-                            }
+                                return 4239999615;
                         }
                         else
                         {
-                            if (i <= 205)
-                            {
-                                if (i == 204)
-                                    return 4084756634;
-                                else
-                                    return 4092854726;
-                            }
+                            if (i == 230)
+                                return 4244138385;
                             else
-                            {
-                                if (i == 206)
-                                    return 4100797514;
-                                else
-                                    return 4108584696;
-                            }
+                                return 4248116110;
                         }
                     }
                 }
                 else
                 {
-                    if (i <= 215)
+                    if (i <= 235)
                     {
-                        if (i <= 211)
+                        if (i <= 233)
                         {
-                            if (i <= 209)
-                            {
-                                if (i == 208)
-                                    return 4116215977;
-                                else
-                                    return 4123691067;
-                            }
+                            if (i == 232)
+                                return 4251932639;
                             else
-                            {
-                                if (i == 210)
-                                    return 4131009681;
-                                else
-                                    return 4138171544;
-                            }
+                                return 4255587827;
                         }
                         else
                         {
-                            if (i <= 213)
-                            {
-                                if (i == 212)
-                                    return 4145176382;
-                                else
-                                    return 4152023930;
-                            }
+                            if (i == 234)
+                                return 4259081536;
                             else
-                            {
-                                if (i == 214)
-                                    return 4158713929;
-                                else
-                                    return 4165246124;
-                            }
+                                return 4262413632;
                         }
                     }
                     else
                     {
-                        if (i <= 219)
+                        if (i <= 237)
                         {
-                            if (i <= 217)
-                            {
-                                if (i == 216)
-                                    return 4171620267;
-                                else
-                                    return 4177836117;
-                            }
+                            if (i == 236)
+                                return 4265583990;
                             else
-                            {
-                                if (i == 218)
-                                    return 4183893437;
-                                else
-                                    return 4189791999;
-                            }
+                                return 4268592489;
                         }
                         else
                         {
-                            if (i <= 221)
-                            {
-                                if (i == 220)
-                                    return 4195531577;
-                                else
-                                    return 4201111955;
-                            }
+                            if (i == 238)
+                                return 4271439015;
                             else
-                            {
-                                if (i == 222)
-                                    return 4206532921;
-                                else
-                                    return 4211794268;
-                            }
+                                return 4274123460;
                         }
                     }
                 }
             }
             else
             {
-                if (i <= 239)
+                if (i <= 247)
                 {
-                    if (i <= 231)
+                    if (i <= 243)
                     {
-                        if (i <= 227)
+                        if (i <= 241)
                         {
-                            if (i <= 225)
-                            {
-                                if (i == 224)
-                                    return 4216895797;
-                                else
-                                    return 4221837315;
-                            }
+                            if (i == 240)
+                                return 4276645722;
                             else
-                            {
-                                if (i == 226)
-                                    return 4226618635;
-                                else
-                                    return 4231239573;
-                            }
+                                return 4279005706;
                         }
                         else
                         {
-                            if (i <= 229)
-                            {
-                                if (i == 228)
-                                    return 4235699957;
-                                else
-                                    return 4239999615;
-                            }
+                            if (i == 242)
+                                return 4281203321;
                             else
-                            {
-                                if (i == 230)
-                                    return 4244138385;
-                                else
-                                    return 4248116110;
-                            }
+                                return 4283238485;
                         }
                     }
                     else
                     {
-                        if (i <= 235)
+                        if (i <= 245)
                         {
-                            if (i <= 233)
-                            {
-                                if (i == 232)
-                                    return 4251932639;
-                                else
-                                    return 4255587827;
-                            }
+                            if (i == 244)
+                                return 4285111119;
                             else
-                            {
-                                if (i == 234)
-                                    return 4259081536;
-                                else
-                                    return 4262413632;
-                            }
+                                return 4286821154;
                         }
                         else
                         {
-                            if (i <= 237)
-                            {
-                                if (i == 236)
-                                    return 4265583990;
-                                else
-                                    return 4268592489;
-                            }
+                            if (i == 246)
+                                return 4288368525;
                             else
-                            {
-                                if (i == 238)
-                                    return 4271439015;
-                                else
-                                    return 4274123460;
-                            }
+                                return 4289753172;
                         }
                     }
                 }
                 else
                 {
-                    if (i <= 247)
+                    if (i <= 251)
                     {
-                        if (i <= 243)
+                        if (i <= 249)
                         {
-                            if (i <= 241)
-                            {
-                                if (i == 240)
-                                    return 4276645722;
-                                else
-                                    return 4279005706;
-                            }
+                            if (i == 248)
+                                return 4290975043;
                             else
-                            {
-                                if (i == 242)
-                                    return 4281203321;
-                                else
-                                    return 4283238485;
-                            }
+                                return 4292034091;
                         }
                         else
                         {
-                            if (i <= 245)
-                            {
-                                if (i == 244)
-                                    return 4285111119;
-                                else
-                                    return 4286821154;
-                            }
+                            if (i == 250)
+                                return 4292930277;
                             else
-                            {
-                                if (i == 246)
-                                    return 4288368525;
-                                else
-                                    return 4289753172;
-                            }
+                                return 4293663567;
                         }
                     }
                     else
                     {
-                        if (i <= 251)
+                        if (i <= 253)
                         {
-                            if (i <= 249)
-                            {
-                                if (i == 248)
-                                    return 4290975043;
-                                else
-                                    return 4292034091;
-                            }
+                            if (i == 252)
+                                return 4294233932;
                             else
-                            {
-                                if (i == 250)
-                                    return 4292930277;
-                                else
-                                    return 4293663567;
-                            }
+                                return 4294641351;
                         }
                         else
                         {
-                            if (i <= 253)
-                            {
-                                if (i == 252)
-                                    return 4294233932;
-                                else
-                                    return 4294641351;
-                            }
+                            if (i == 254)
+                                return 4294885809;
                             else
-                            {
-                                if (i == 254)
-                                    return 4294885809;
-                                else
-                                    return 4294967296;
-                            }
+                                return 4294967296;
                         }
                     }
                 }

@@ -173,7 +173,7 @@ public static class Trig256
     {
         var xl = x;
         if (xl < 0)
-            throw new ArgumentOutOfRangeException($"Negative value passed to Sqrt", "x");
+            throw new ArgumentOutOfRangeException("Negative value passed to Sqrt", "x");
 
         var num = (ulong) xl;
         var result = (ulong) 0;

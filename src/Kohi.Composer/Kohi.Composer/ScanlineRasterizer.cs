@@ -31,7 +31,8 @@ public sealed class ScanlineRasterizer : CastingShim
                 if (scanlineSpan.Length > 0)
                 {
                     BlendSolidHorizontalSpan(g,
-                        new BlendSolidHorizontalSpanArgs(x, y, scanlineSpan.Length, color, covers, scanlineSpan.CoverIndex,
+                        new BlendSolidHorizontalSpanArgs(x, y, scanlineSpan.Length, color, covers,
+                            scanlineSpan.CoverIndex,
                             blend));
                 }
                 else

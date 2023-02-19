@@ -455,7 +455,7 @@ public static class CellRasterizer
     {
         public readonly int Ey;
         public readonly int X1;
-        public int Y1; 
+        public int Y1;
         public readonly int X2;
         public readonly int Y2;
 

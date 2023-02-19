@@ -1,4 +1,4 @@
-﻿// Copyright Kohi Art Community, Inc.. All rights reserved.
+﻿// Copyright (c) Kohi Art Community, Inc.
 
 namespace Kohi.Composer.V1;
 

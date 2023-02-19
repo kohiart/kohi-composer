@@ -1,3 +1,5 @@
+// Copyright (c) Kohi Art Community, Inc.
+
 namespace Kohi.Composer;
 
 public struct SortedY
