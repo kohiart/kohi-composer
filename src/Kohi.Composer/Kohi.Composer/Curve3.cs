@@ -61,7 +61,7 @@ public sealed class Curve3
         {
             if (Fix64.Mul(d, d) <= Fix64.Mul(_distanceToleranceSquare, Fix64.Mul(dx, dx) + Fix64.Mul(dy, dy)))
             {
-                if (0 < MathUtils.AngleTolerance)
+                if (d < MathUtils.AngleTolerance)
                 {
                     _points.Add(new Vector2(x123, y123));
                     return;
