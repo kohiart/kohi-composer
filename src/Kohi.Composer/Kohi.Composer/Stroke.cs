@@ -741,7 +741,6 @@ public sealed class Stroke
 
     private struct CalcCapArgs
     {
-        public uint VertexCount;
         public long Dx1;
         public long Dy1;
         public long Dx2;
@@ -762,7 +761,6 @@ public sealed class Stroke
         public long Dx;
         public long Dy;
         public long BevelDistance;
-        public bool Intersects;
     }
 
     private struct CalcArcArgs

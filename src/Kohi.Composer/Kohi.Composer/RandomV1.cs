@@ -1,7 +1,5 @@
 ﻿// Copyright (c) Kohi Art Community, Inc.
 
-using Kohi.Composer.V1;
-
 namespace Kohi.Composer;
 
 public class RandomV1

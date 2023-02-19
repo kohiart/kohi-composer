@@ -36,9 +36,9 @@ public readonly struct Rectangle
         return new {x1 = Left, x2 = Right, y1 = Bottom, y2 = Top}.GetHashCode();
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-        if (obj.GetType() == typeof(Rectangle)) return this == (Rectangle) obj;
+        if (obj?.GetType() == typeof(Rectangle)) return this == (Rectangle) obj;
 
         return false;
     }

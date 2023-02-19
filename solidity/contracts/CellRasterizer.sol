@@ -20,6 +20,7 @@ pragma solidity ^0.8.13;
 import "./CellData.sol";
 import "./SubpixelScale.sol";
 import "./Graphics2D.sol";
+import "./DrawContext.sol";
 
 library CellRasterizer {
     function resetCells(CellData memory cellData) internal pure {
