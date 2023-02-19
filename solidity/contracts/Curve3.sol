@@ -130,7 +130,7 @@ library Curve3 {
                     Fix64.mul(a.dx, a.dx) + Fix64.mul(a.dy, a.dy)
                 )
             ) {
-                if (0 < MathUtils.AngleTolerance) {
+                if (d < MathUtils.AngleTolerance) {
                     self.points[self.pointCount++] = Vector2(a.x123, a.y123);
                     return;
                 }
