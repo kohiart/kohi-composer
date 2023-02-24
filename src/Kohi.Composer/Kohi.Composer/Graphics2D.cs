@@ -2,8 +2,6 @@
 
 using System.Drawing;
 
-// ReSharper disable InconsistentNaming
-
 namespace Kohi.Composer;
 
 public class Graphics2D : CastingShim
@@ -137,23 +135,23 @@ public class Graphics2D : CastingShim
 
             unchecked
             {
-                if (sa == 255)
+                if (sourceColor >> 24 == 255)
                 {
                     buffer[bufferOffset + OrderR] = sr;
                     buffer[bufferOffset + OrderG] = sg;
-                    buffer[bufferOffset + OrderB] = sb;
+                    buffer[bufferOffset] = sb;
                     buffer[bufferOffset + OrderA] = sa;
                 }
                 else
                 {
                     var r = buffer[bufferOffset + OrderR];
                     var g = buffer[bufferOffset + OrderG];
-                    var b = buffer[bufferOffset + OrderB];
+                    var b = buffer[bufferOffset];
                     var a = buffer[bufferOffset + OrderA];
 
                     buffer[bufferOffset + OrderR] = uint8(((sr - r) * sa + (r << 8)) >> 8);
                     buffer[bufferOffset + OrderG] = uint8(((sg - g) * sa + (g << 8)) >> 8);
-                    buffer[bufferOffset + OrderB] = uint8(((sb - b) * sa + (b << 8)) >> 8);
+                    buffer[bufferOffset] = uint8(((sb - b) * sa + (b << 8)) >> 8);
                     buffer[bufferOffset + OrderA] = uint8(sa + a - ((sa * a + 255) >> 8));
                 }
             }
@@ -168,9 +166,8 @@ public class Graphics2D : CastingShim
             g.ScanlineData.Status = ScanlineStatus.Initial;
         }
 
-        for (var i = 0; i < vertices.Count; i++)
+        foreach (var vertex in vertices)
         {
-            var vertex = vertices[i];
             if (vertex.Command == Command.Stop)
                 break;
 

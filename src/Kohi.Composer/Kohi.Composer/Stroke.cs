@@ -6,17 +6,13 @@ public sealed class Stroke
 {
     private readonly VertexDistance[] _distances;
     private readonly Vector2[] _outVertices;
-
     private readonly VertexData[] _vertexSource;
     private readonly long _width;
     private readonly long _widthAbs;
     private readonly long _widthEps;
     private readonly long _widthSign;
-
     private bool _closed;
     private int _distanceCount;
-
-
     private Command _lastCommand;
     private int _outVertexCount;
     private int _outVerticesCount;
@@ -24,10 +20,7 @@ public sealed class Stroke
     private int _srcVertex;
     private long _startX;
     private long _startY;
-
     private StrokeStatus _status;
-
-
     private VertexStatus _vertexStatus;
 
     public LineCap LineCap;
@@ -362,9 +355,11 @@ public sealed class Stroke
                 a.Dy2 = a.Dx1 * self._widthSign;
             }
 
-            self._outVertices[self._outVerticesCount++] = new Vector2(Fix64.Sub(v0.X, Fix64.Sub(a.Dx1, a.Dx2)),
+            self._outVertices[self._outVerticesCount++] = new Vector2(
+                Fix64.Sub(v0.X, Fix64.Sub(a.Dx1, a.Dx2)),
                 Fix64.Add(v0.Y, Fix64.Sub(a.Dy1, a.Dy2)));
-            self._outVertices[self._outVerticesCount++] = new Vector2(Fix64.Add(v0.X, Fix64.Sub(a.Dx1, a.Dx2)),
+            self._outVertices[self._outVerticesCount++] = new Vector2(
+                Fix64.Add(v0.X, Fix64.Sub(a.Dx1, a.Dx2)),
                 Fix64.Sub(v0.Y, Fix64.Sub(a.Dy1, a.Dy2)));
         }
         else
@@ -495,7 +490,6 @@ public sealed class Stroke
             }
         }
     }
-
 
     private static void CalcArc(Stroke self, CalcArcArgs f)
     {

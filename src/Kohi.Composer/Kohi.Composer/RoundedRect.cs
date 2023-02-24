@@ -58,7 +58,6 @@ public class RoundedRect
 
         JoinPaths.Join(vertices, arc0, 0);
 
-
         var v1 = _transform.Transform(new Vector2(
             Fix64.Sub(right, _rightBottomRadius.X),
             Fix64.Add(bottom, _rightBottomRadius.Y)

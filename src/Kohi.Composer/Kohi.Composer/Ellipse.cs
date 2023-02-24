@@ -29,7 +29,7 @@ public class Ellipse
         );
 
         var t1 = Fix64.Mul(Fix64.Two, Fix64.Div(Fix64.Pi, da));
-        Steps = (int) (Fix64.Round(t1) / (float) Fix64.One);
+        Steps = (int) (Fix64.Round(t1) / Fix64.One);
     }
 
     public IEnumerable<VertexData> Vertices()
